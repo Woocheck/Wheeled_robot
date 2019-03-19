@@ -21,8 +21,16 @@ DC_motor_class::~DC_motor_class()
 {
 } //~DC_motor_class
 
-void DC_motor_class::DC_initialization()
+void DC_motor_class::DC_initialization(volatile uint8_t* ddr_pin_a, volatile uint8_t* port_pin_a,uint8_t pin_a,
+volatile uint8_t* ddr_pin_b, volatile uint8_t* port_pin_b,uint8_t pin_b,
+volatile uint8_t* ddr_pin_enable, volatile uint8_t* port_pin_enable,
+uint8_t pin_enable)
 {
+		
+		DDR_Pin_A=ddr_pin_a; Port_PIN_A=port_pin_a; PIN_A=pin_a; 
+		DDR_Pin_B=ddr_pin_b; Port_PIN_B=port_pin_b; PIN_B=pin_b;
+		DDR_Pin_Enable=ddr_pin_a; Port_PIN_Eenable=port_pin_enable; 
+		PIN_Enable=pin_enable;
 	
 }
 

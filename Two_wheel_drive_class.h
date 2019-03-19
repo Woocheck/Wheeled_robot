@@ -24,14 +24,8 @@ private:
 
 
 
-DC_motor_class Left_DC(&DDR_LEFT_A,&PORT_LEFT_A,PIN_LEFT_A,
-						&DDR_LEFT_B,&PORT_LEFT_B,PIN_LEFT_B,
-						&DDR_LEFT_ENABLE,&PORT_LEFT_ENABLE,
-						PIN_LEFT_ENABLE);
-DC_motor_class Right_DC(&DDR_RIGHT_A,&PORT_RIGHT_A,PIN_RIGHT_A,
-						  &DDR_RIGHT_B,&PORT_RIGHT_B,PIN_RIGHT_B,
-						  &DDR_RIGHT_ENABLE,&PORT_RIGHT_ENABLE,
-						  PIN_RIGHT_ENABLE);
+DC_motor_class Left_DC;
+DC_motor_class Right_DC;
 
 //functions
 public:
