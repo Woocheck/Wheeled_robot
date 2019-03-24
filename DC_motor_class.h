@@ -12,9 +12,9 @@
 #include "avr/io.h"
 #include "pin_settings.h"
 
-enum direction {forward, backward};
+enum Direction {forward, backward};
 
-class DC_motor_class
+class DcMotorClass
 {
 //variables
 public:
@@ -30,33 +30,40 @@ volatile uint8_t  PIN_A;
 volatile uint8_t  PIN_B;
 volatile uint8_t  PIN_Enable;
 
-volatile direction DC_direction=forward;
-volatile uint8_t DC_speed=0;
+volatile uint8_t* ddrRegister;
+volatile uint8_t pwmPinRegister;
+volatile uint8_t* tccrRegisterA;
+volatile uint8_t* tccrRegisterB;	
+
+volatile Direction direction=forward;
+volatile uint8_t* speedRegister;
 
 //functions
 public:
-	DC_motor_class();
+	DcMotorClass();
+	~DcMotorClass();
 	
-
-	~DC_motor_class();
+	void initialize(volatile uint8_t* ddr_pin_a, volatile uint8_t* port_pin_a,uint8_t pin_a,
+					volatile uint8_t* ddr_pin_b, volatile uint8_t* port_pin_b,uint8_t pin_b,
+					volatile uint8_t* ddr_pin_enable, volatile uint8_t* port_pin_enable,
+					uint8_t pin_enable);
+				   
+	void initializePwm(volatile uint8_t *ddr, volatile uint8_t pin, 
+					volatile uint8_t* tccrA,volatile uint8_t* tccrB, 
+					volatile uint8_t* ocr);
 	
-	void DC_initialization(volatile uint8_t* ddr_pin_a, volatile uint8_t* port_pin_a,uint8_t pin_a,
-				   volatile uint8_t* ddr_pin_b, volatile uint8_t* port_pin_b,uint8_t pin_b,
-				   volatile uint8_t* ddr_pin_enable, volatile uint8_t* port_pin_enable,
-				   uint8_t pin_enable);
+	void setDirection(Direction demanded_direction);					
+	void setSpeed(uint8_t demanded_speed);
 	
-	void set_DC_direction(direction demanded_direction);					
-	void set_DC_speed(uint8_t demanded_speed) {DC_speed=demanded_speed;};
-	
-	void DC_start();
-	void DC_stop();
-	void DC_contol(direction demanded_direction, uint8_t demanded_speed);
+	void start();
+	void stop();
+	void contol(Direction demanded_direction, uint8_t demanded_speed);
 	
 protected:
 private:
-	DC_motor_class( const DC_motor_class &c );
-	DC_motor_class& operator=( const DC_motor_class &c );
+	DcMotorClass( const DcMotorClass &c );
+	DcMotorClass& operator=( const DcMotorClass &c );
 
-}; //DC_motor_class
+}; //DcMmotorClass
 
 #endif //__DC_MOTOR_CLASS_H__

@@ -6,11 +6,13 @@
 */
 #include <avr/io.h>
 #include "pin_settings.h"
+#include "Two_wheel_drive_class.h"
 
+TwoWheelDriveClass Drive;
 
 int main(void)
 {
-    /* Replace with your application code */
+    
     while (1) 
     {
     }

@@ -15,26 +15,27 @@
 #include "DC_motor_class.h"
 
 
-class Two_wheel_drive_class
+
+class TwoWheelDriveClass
 {
 //variables
 public:
 protected:
 private:
 
-
-
-DC_motor_class Left_DC;
-DC_motor_class Right_DC;
+DcMotorClass Left_DC;
+DcMotorClass Right_DC;
+uint8_t speed {0};
 
 //functions
 public:
-	Two_wheel_drive_class();
-	~Two_wheel_drive_class();
+	TwoWheelDriveClass();
+	~TwoWheelDriveClass();
+	
 protected:
 private:
-	Two_wheel_drive_class( const Two_wheel_drive_class &c );
-	Two_wheel_drive_class& operator=( const Two_wheel_drive_class &c );
+	TwoWheelDriveClass( const TwoWheelDriveClass &c );
+	TwoWheelDriveClass& operator=( const TwoWheelDriveClass &c );
 
 }; //Two_wheel_drive_class
 

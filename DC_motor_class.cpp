@@ -11,20 +11,20 @@
 
 
 // default constructor
-DC_motor_class::DC_motor_class()
+DcMotorClass::DcMotorClass()
 {
 } //DC_motor_class
 
 
 // default destructor
-DC_motor_class::~DC_motor_class()
+DcMotorClass::~DcMotorClass()
 {
 } //~DC_motor_class
 
-void DC_motor_class::DC_initialization(volatile uint8_t* ddr_pin_a, volatile uint8_t* port_pin_a,uint8_t pin_a,
-volatile uint8_t* ddr_pin_b, volatile uint8_t* port_pin_b,uint8_t pin_b,
-volatile uint8_t* ddr_pin_enable, volatile uint8_t* port_pin_enable,
-uint8_t pin_enable)
+void DcMotorClass::initialize(volatile uint8_t* ddr_pin_a, volatile uint8_t* port_pin_a,uint8_t pin_a,
+							 volatile uint8_t* ddr_pin_b, volatile uint8_t* port_pin_b,uint8_t pin_b,
+							  volatile uint8_t* ddr_pin_enable, volatile uint8_t* port_pin_enable,
+							  uint8_t pin_enable)
 {
 		
 		DDR_Pin_A=ddr_pin_a; Port_PIN_A=port_pin_a; PIN_A=pin_a; 
@@ -34,36 +34,71 @@ uint8_t pin_enable)
 	
 }
 
-void DC_motor_class::set_DC_direction(direction demanded_direction)
+void DcMotorClass::initializePwm(volatile uint8_t* ddr, volatile uint8_t pin,  
+							volatile uint8_t* tccrA,volatile uint8_t* tccrB,
+							volatile uint8_t* ocr)
 {
-	DC_motor_class::DC_direction=demanded_direction;
-	if (DC_direction==forward)
+	DcMotorClass::tccrRegisterA=tccrA;
+	DcMotorClass::tccrRegisterB=tccrB;
+	DcMotorClass::speedRegister=ocr;
+	DcMotorClass::ddrRegister=ddr;
+	DcMotorClass::pwmPinRegister=pin;
+	
+	*ddrRegister|=(1<<pwmPinRegister);
+	*tccrRegisterA|=(1<<COM2A1);
+	*tccrRegisterA|=(1<<WGM21)|(1<<WGM10);
+	*tccrRegisterB|=(1<<CS20);
+	*speedRegister=0;
+	
+}
+
+void DcMotorClass::setDirection(Direction demanded_direction)
+{
+	DcMotorClass::direction=demanded_direction;
+	if (direction==forward)
 	{
-		*Port_PIN_A|=(1<<DC_motor_class::PIN_A);
-		*Port_PIN_B&=~(1<<DC_motor_class::PIN_B);
+		*Port_PIN_A|=(1<<DcMotorClass::PIN_A);
+		*Port_PIN_B&=~(1<<DcMotorClass::PIN_B);
 	}
-	else if(DC_direction==backward)
+	else if(direction==backward)
 	{
-		*Port_PIN_A&=~(1<<DC_motor_class::PIN_A);
-		*Port_PIN_B|=(1<<DC_motor_class::PIN_B);
+		*Port_PIN_A&=~(1<<DcMotorClass::PIN_A);
+		*Port_PIN_B|=(1<DcMotorClass::PIN_B);
 	}
 }
 
-void DC_motor_class::DC_start()
+
+void DcMotorClass::setSpeed(volatile uint8_t demanded_speed)
 {
-	set_DC_direction(DC_direction);
+	if(demanded_speed<0)
+	{
+		*(DcMotorClass::speedRegister)=0;
+	}
+	else if(demanded_speed>255)
+	{
+		*(DcMotorClass::speedRegister)=255;
+	}
+	else
+	{
+		*(DcMotorClass::speedRegister)=demanded_speed;
+	}
 }
 
-void DC_motor_class::DC_stop()
+void DcMotorClass::start()
 {
-	*Port_PIN_A&=~(1<<DC_motor_class::PIN_A);
-	*Port_PIN_B&=~(1<<DC_motor_class::PIN_B);
+	setDirection(direction);
+}
+
+void DcMotorClass::stop()
+{
+	*Port_PIN_A&=~(1<<DcMotorClass::PIN_A);
+	*Port_PIN_B&=~(1<<DcMotorClass::PIN_B);
 }
 
 
-void DC_motor_class::DC_contol(direction demanded_direction, uint8_t demanded_speed)
+void DcMotorClass::contol(Direction demanded_direction, uint8_t demanded_speed)
 {
-	DC_motor_class::set_DC_direction(demanded_direction);
-	DC_motor_class::set_DC_speed(demanded_speed); 
-	DC_motor_class::DC_start();
+	DcMotorClass::setDirection(demanded_direction);
+	DcMotorClass::setSpeed(demanded_speed); 
+	DcMotorClass::start();
 }

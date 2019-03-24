@@ -32,7 +32,16 @@
  #define PIN_RIGHT_B PINA3
  #define PIN_RIGHT_ENABLE PINH5
 
-
-
-
+ #define PWM_DDR_LEFT DDRB
+ #define PWM_PIN_LEFT PINB4 
+ #define TCCR_LEFT_A TCCR2A
+ #define TCCR_LEFT_B TCCR2B
+ #define OCR_LEFT OCR2A
+ 
+ #define PWM_DDR_RIGHT DDRH
+ #define PWM_PIN_RIGHT PINH6
+ #define TCCR_RIGHT_A TCCR2A
+ #define TCCR_RIGHT_B TCCR2B
+ #define OCR_RIGHT OCR2B
+ 
 #endif /* PIN_SETTINGS_H_ */
