@@ -34,3 +34,44 @@ TwoWheelDriveClass::TwoWheelDriveClass()
 TwoWheelDriveClass::~TwoWheelDriveClass()
 {
 } //~Two_wheel_drive_class
+
+void TwoWheelDriveClass::setSpeed(uint8_t demandedSpeed)
+{
+	speed=demandedSpeed;
+	Left_DC.contol(direction, speed);
+	Right_DC.contol(direction, speed);
+};
+void TwoWheelDriveClass::setDirection(uint8_t demandedDirection)
+{
+		if(direction!=demandedDirection)
+		{
+			setNewDirection(demandedDirection);
+		};
+};
+
+void TwoWheelDriveClass::setNewDirection(DemandedDirection demandedDirection)
+{
+	static bool isDirectionChange {true};
+	if(demandedDirection==forward)
+	{
+		Left_DC.contol(forward,speed);
+		Right_DC.contol(forward,speed);
+	}
+	else if(demandedDirection==backward)
+	{
+		Left_DC.contol(backward,speed);
+		Right_DC.contol(backward,speed);
+		
+	}
+	else if(demandedDirection==left)
+	{
+		Left_DC.stop();
+		Right_DC.contol(forward,speed);
+	}
+	else if(demandedDirection==right)
+	{
+		Left_DC.contol(forward,speed);
+		Right_DC.stop();
+	}
+	
+};
