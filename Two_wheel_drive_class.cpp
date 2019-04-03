@@ -41,37 +41,29 @@ void TwoWheelDriveClass::setSpeed(uint8_t demandedSpeed)
 	Left_DC.contol(direction, speed);
 	Right_DC.contol(direction, speed);
 };
-void TwoWheelDriveClass::setDirection(uint8_t demandedDirection)
+void TwoWheelDriveClass::goFoward()
 {
-		if(direction!=demandedDirection)
-		{
-			setNewDirection(demandedDirection);
-		};
+	Left_DC.contol(forward, speed);
+	Right_DC.contol(forward, speed);
+};
+void TwoWheelDriveClass::goBackward()
+{
+	Left_DC.contol(backward, speed);
+	Right_DC.contol(backward, speed);
+};
+void TwoWheelDriveClass::turnLeft()
+{
+	Left_DC.stop();
+	Right_DC.contol(forward, speed);
+};
+void TwoWheelDriveClass::turnRight()
+{
+	Left_DC.contol(forward, speed);
+	Right_DC.stop();
+};
+void TwoWheelDriveClass::stop()
+{
+	Left_DC.stop();
+	Right_DC.stop();
 };
 
-void TwoWheelDriveClass::setNewDirection(DemandedDirection demandedDirection)
-{
-	static bool isDirectionChange {true};
-	if(demandedDirection==forward)
-	{
-		Left_DC.contol(forward,speed);
-		Right_DC.contol(forward,speed);
-	}
-	else if(demandedDirection==backward)
-	{
-		Left_DC.contol(backward,speed);
-		Right_DC.contol(backward,speed);
-		
-	}
-	else if(demandedDirection==left)
-	{
-		Left_DC.stop();
-		Right_DC.contol(forward,speed);
-	}
-	else if(demandedDirection==right)
-	{
-		Left_DC.contol(forward,speed);
-		Right_DC.stop();
-	}
-	
-};

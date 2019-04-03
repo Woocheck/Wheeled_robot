@@ -14,7 +14,7 @@
 #include "pin_settings.h"
 #include "DC_motor_class.h"
 
-enum DemandedDirection {forward, backward, left, right};
+enum DemandedDirection {ahead, back, left, right};
 
 class TwoWheelDriveClass
 {
@@ -33,12 +33,15 @@ public:
 	TwoWheelDriveClass();
 	~TwoWheelDriveClass();
 	void setSpeed(uint8_t demandedSpeed);
-	void setDirection(uint8_t demandedDirection);
+	void goFoward();
+	void goBackward();
+	void turnLeft();
+	void turnRight();
+	void stop();
 	
 	
 protected:
 private:
-	void setNewDirection(uint8_t demandedDirection);
 	TwoWheelDriveClass( const TwoWheelDriveClass &c );
 	TwoWheelDriveClass& operator=( const TwoWheelDriveClass &c );
 

@@ -18,8 +18,8 @@
  #define PORT_LEFT_A PORTA
  #define PORT_LEFT_B PORTA
  #define PORT_LEFT_ENABLE PORTH
- #define PIN_LEFT_A PINA5
- #define PIN_LEFT_B PINA7
+ #define PIN_LEFT_A PINA7
+ #define PIN_LEFT_B PINA5
  #define PIN_LEFT_ENABLE PINH6
  
  #define DDR_RIGHT_A DDRA
@@ -28,8 +28,8 @@
  #define PORT_RIGHT_A PORTA
  #define PORT_RIGHT_B PORTA
  #define PORT_RIGHT_ENABLE PORTH
- #define PIN_RIGHT_A PINA1
- #define PIN_RIGHT_B PINA3
+ #define PIN_RIGHT_A PINA3
+ #define PIN_RIGHT_B PINA1
  #define PIN_RIGHT_ENABLE PINH5
 
  #define PWM_DDR_LEFT DDRB

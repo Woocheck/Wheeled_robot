@@ -57,13 +57,13 @@ void DcMotorClass::setDirection(Direction demanded_direction)
 	DcMotorClass::direction=demanded_direction;
 	if (direction==forward)
 	{
-		*Port_PIN_A|=(1<<DcMotorClass::PIN_A);
-		*Port_PIN_B&=~(1<<DcMotorClass::PIN_B);
+		*Port_PIN_A|=(1<<PIN_A);
+		*Port_PIN_B&=~(1<<PIN_B);
 	}
 	else if(direction==backward)
 	{
-		*Port_PIN_A&=~(1<<DcMotorClass::PIN_A);
-		*Port_PIN_B|=(1<DcMotorClass::PIN_B);
+		*Port_PIN_A&=~(1<<PIN_A);
+		*Port_PIN_B|=(1<PIN_B);
 	}
 }
 
