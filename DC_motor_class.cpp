@@ -31,6 +31,10 @@ void DcMotorClass::initialize(volatile uint8_t* ddr_pin_a, volatile uint8_t* por
 		DDR_Pin_B=ddr_pin_b; Port_PIN_B=port_pin_b; PIN_B=pin_b;
 		DDR_Pin_Enable=ddr_pin_a; Port_PIN_Eenable=port_pin_enable; 
 		PIN_Enable=pin_enable;
+		
+		*DDR_Pin_A|=(1<<PIN_A);
+		*DDR_Pin_B|=(1<<PIN_B);
+		*DDR_Pin_Enable|=(1<<PIN_Enable);
 	
 }
 
