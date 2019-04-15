@@ -25,14 +25,14 @@ private:
 
 DcMotorClass Left_DC;
 DcMotorClass Right_DC;
-uint8_t speed {0};
+int speed {0};
 Direction direction {forward};
 
 //functions
 public:
 	TwoWheelDriveClass();
 	~TwoWheelDriveClass();
-	void setSpeed(uint8_t demandedSpeed);
+	void setSpeed(int demandedSpeed);
 	void goFoward();
 	void goBackward();
 	void turnLeft();

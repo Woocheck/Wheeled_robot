@@ -5,9 +5,8 @@
 * Author: Woocheck
 */
 
-#include "avr/io.h"
-#include "pin_settings.h"
-#include "DC_motor_class.h" 
+#include "./pin_settings.h"
+#include "./DC_motor_class.h" 
 
 
 // default constructor
@@ -21,39 +20,16 @@ DcMotorClass::~DcMotorClass()
 {
 } //~DC_motor_class
 
-void DcMotorClass::initialize(volatile uint8_t* ddr_pin_a, volatile uint8_t* port_pin_a,uint8_t pin_a,
-							 volatile uint8_t* ddr_pin_b, volatile uint8_t* port_pin_b,uint8_t pin_b,
-							  volatile uint8_t* ddr_pin_enable, volatile uint8_t* port_pin_enable,
-							  uint8_t pin_enable)
+void DcMotorClass::initialize(int pin_a,int pin_b,int pin_enable)
 {
-		
-		DDR_Pin_A=ddr_pin_a; Port_PIN_A=port_pin_a; PIN_A=pin_a; 
-		DDR_Pin_B=ddr_pin_b; Port_PIN_B=port_pin_b; PIN_B=pin_b;
-		DDR_Pin_Enable=ddr_pin_a; Port_PIN_Eenable=port_pin_enable; 
-		PIN_Enable=pin_enable;
-		
-		*DDR_Pin_A|=(1<<PIN_A);
-		*DDR_Pin_B|=(1<<PIN_B);
-		*DDR_Pin_Enable|=(1<<PIN_Enable);
-	
+	PIN_A=pin_a;
+	PIN_B=pin_b;
+	PIN_Enable=pin_enable;	
 }
 
-void DcMotorClass::initializePwm(volatile uint8_t* ddr, volatile uint8_t pin,  
-							volatile uint8_t* tccrA,volatile uint8_t* tccrB,
-							volatile uint8_t* ocr)
+void DcMotorClass::initializePwm()
 {
-	DcMotorClass::tccrRegisterA=tccrA;
-	DcMotorClass::tccrRegisterB=tccrB;
-	DcMotorClass::speedRegister=ocr;
-	DcMotorClass::ddrRegister=ddr;
-	DcMotorClass::pwmPinRegister=pin;
-	
-	*ddrRegister|=(1<<pwmPinRegister);
-	*tccrRegisterA|=(1<<COM2A1);
-	*tccrRegisterA|=(1<<WGM21)|(1<<WGM10);
-	*tccrRegisterB|=(1<<CS20);
-	*speedRegister=0;
-	
+	//TODO: PWM settings	
 }
 
 void DcMotorClass::setDirection(Direction demanded_direction)
@@ -61,30 +37,28 @@ void DcMotorClass::setDirection(Direction demanded_direction)
 	DcMotorClass::direction=demanded_direction;
 	if (direction==forward)
 	{
-		*Port_PIN_A|=(1<<PIN_A);
-		*Port_PIN_B&=~(1<<PIN_B);
+		
 	}
 	else if(direction==backward)
 	{
-		*Port_PIN_A&=~(1<<PIN_A);
-		*Port_PIN_B|=(1<PIN_B);
+		
 	}
 }
 
 
-void DcMotorClass::setSpeed(volatile uint8_t demanded_speed)
+void DcMotorClass::setSpeed(volatile int demanded_speed)
 {
 	if(demanded_speed<0)
 	{
-		*(DcMotorClass::speedRegister)=0;
+		*(DcMotorClass::speed)=0;
 	}
 	else if(demanded_speed>255)
 	{
-		*(DcMotorClass::speedRegister)=255;
+		*(DcMotorClass::speed)=255;
 	}
 	else
 	{
-		*(DcMotorClass::speedRegister)=demanded_speed;
+		*(DcMotorClass::speed)=demanded_speed;
 	}
 }
 
@@ -100,7 +74,7 @@ void DcMotorClass::stop()
 }
 
 
-void DcMotorClass::contol(Direction demanded_direction, uint8_t demanded_speed)
+void DcMotorClass::contol(Direction demanded_direction, int demanded_speed)
 {
 	DcMotorClass::setDirection(demanded_direction);
 	DcMotorClass::setSpeed(demanded_speed); 

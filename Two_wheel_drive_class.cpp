@@ -35,7 +35,7 @@ TwoWheelDriveClass::~TwoWheelDriveClass()
 {
 } //~Two_wheel_drive_class
 
-void TwoWheelDriveClass::setSpeed(uint8_t demandedSpeed)
+void TwoWheelDriveClass::setSpeed(int demandedSpeed)
 {
 	speed=demandedSpeed;
 	Left_DC.contol(direction, speed);
