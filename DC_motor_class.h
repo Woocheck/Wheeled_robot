@@ -22,7 +22,7 @@ volatile int  pinA;
 volatile int  pinB;
 volatile int  pinEnable;
 
-volatile Direction direction = forward;
+volatile Direction direction = Direction::forward;
 volatile int speed;
 
 //functions

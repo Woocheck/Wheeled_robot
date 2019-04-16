@@ -35,11 +35,11 @@ void DcMotorClass::initializePwm()
 void DcMotorClass::setDirection(Direction demandedDirection)
 {
 	DcMotorClass::direction=demandedDirection;
-	if (direction==forward)
+	if (direction==Direction::forward)
 	{
 		
 	}
-	else if(direction==backward)
+	else if(direction==Direction::backward)
 	{
 		
 	}
@@ -52,7 +52,7 @@ void DcMotorClass::setSpeed(volatile int demandedSpeed)
 	{
 		
 	}
-	else if(demanded_speed>255)
+	else if(demandedSpeed>255)
 	{
 		
 	}
@@ -75,7 +75,7 @@ void DcMotorClass::stop()
 
 void DcMotorClass::contol(Direction demandedDirection, int demandedSpeed)
 {
-	DcMotorClass::setDirection(demandedDirection);
-	DcMotorClass::setSpeed(demandedSpeed); 
-	DcMotorClass::start();
+	setDirection(demandedDirection);
+	setSpeed(demandedSpeed); 
+	start();
 }
