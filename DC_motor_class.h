@@ -18,9 +18,9 @@ class DcMotorClass
 //variables
 private:
 
-volatile int  PIN_A;
-volatile int  PIN_B;
-volatile int  PIN_Enable;
+volatile int  pinA;
+volatile int  pinB;
+volatile int  pinEnable;
 
 volatile Direction direction = forward;
 volatile int speed;
