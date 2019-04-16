@@ -20,11 +20,11 @@ DcMotorClass::~DcMotorClass()
 {
 } //~DC_motor_class
 
-void DcMotorClass::initialize(int pin_a,int pin_b,int pin_enable)
+void DcMotorClass::initialize(int a,int b,int enable)
 {
-	PIN_A=pin_a;
-	PIN_B=pin_b;
-	PIN_Enable=pin_enable;	
+	pinA=a;
+	pinB=b;
+	pinEnable=enable;	
 }
 
 void DcMotorClass::initializePwm()
