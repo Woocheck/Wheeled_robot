@@ -32,9 +32,9 @@ void DcMotorClass::initializePwm()
 	//TODO: PWM settings	
 }
 
-void DcMotorClass::setDirection(Direction demanded_direction)
+void DcMotorClass::setDirection(Direction demandedDirection)
 {
-	DcMotorClass::direction=demanded_direction;
+	DcMotorClass::direction=demandedDirection;
 	if (direction==forward)
 	{
 		
@@ -46,19 +46,19 @@ void DcMotorClass::setDirection(Direction demanded_direction)
 }
 
 
-void DcMotorClass::setSpeed(volatile int demanded_speed)
+void DcMotorClass::setSpeed(volatile int demandedSpeed)
 {
-	if(demanded_speed<0)
+	if(demandedSpeed<0)
 	{
-		*(DcMotorClass::speed)=0;
+		
 	}
 	else if(demanded_speed>255)
 	{
-		*(DcMotorClass::speed)=255;
+		
 	}
 	else
 	{
-		*(DcMotorClass::speed)=demanded_speed;
+		
 	}
 }
 
@@ -69,14 +69,13 @@ void DcMotorClass::start()
 
 void DcMotorClass::stop()
 {
-	*Port_PIN_A&=~(1<<DcMotorClass::PIN_A);
-	*Port_PIN_B&=~(1<<DcMotorClass::PIN_B);
+	
 }
 
 
-void DcMotorClass::contol(Direction demanded_direction, int demanded_speed)
+void DcMotorClass::contol(Direction demandedDirection, int demandedSpeed)
 {
-	DcMotorClass::setDirection(demanded_direction);
-	DcMotorClass::setSpeed(demanded_speed); 
+	DcMotorClass::setDirection(demandedDirection);
+	DcMotorClass::setSpeed(demandedSpeed); 
 	DcMotorClass::start();
 }
