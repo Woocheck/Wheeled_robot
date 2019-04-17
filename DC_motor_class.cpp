@@ -5,6 +5,8 @@
 * Author: Woocheck
 */
 
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "./pin_settings.h"
 #include "./DC_motor_class.h" 
 
@@ -14,62 +16,62 @@ DcMotorClass::DcMotorClass()
 {
 } //DC_motor_class
 
-
+DcMotorClass(int a, int b, int enable):
+					pinA {a},
+					pinB {b},
+					pinEnable {enable} {
+	pinMode (pinA, OUTPUT);
+	pinMode (pinB, OUTPUT) ;
+	softPwmCreate(pinEnable, 0, 100);
+};
 // default destructor
 DcMotorClass::~DcMotorClass()
 {
 } //~DC_motor_class
-
-void DcMotorClass::initialize(int a,int b,int enable)
-{
-	pinA=a;
-	pinB=b;
-	pinEnable=enable;	
-}
-
-void DcMotorClass::initializePwm()
-{
-	//TODO: PWM settings	
-}
 
 void DcMotorClass::setDirection(Direction demandedDirection)
 {
 	DcMotorClass::direction=demandedDirection;
 	if (direction==Direction::forward)
 	{
-		
+		digitalWrite (0, HIGH); 
+		digitalWrite (0,  LOW); 
 	}
 	else if(direction==Direction::backward)
 	{
-		
+		digitalWrite (0, LOW); 
+		digitalWrite (0,  HIGH);
 	}
 }
 
 
 void DcMotorClass::setSpeed(volatile int demandedSpeed)
 {
+	speed = demandedSpeed;
 	if(demandedSpeed<0)
 	{
-		
+		softPwmCreate(pinEnable, speed, 100);
 	}
 	else if(demandedSpeed>255)
 	{
-		
+		softPwmCreate(pinEnable, speed, 100);
 	}
 	else
 	{
-		
+		softPwmCreate(pinEnable, speed, 100);
 	}
 }
 
 void DcMotorClass::start()
 {
 	setDirection(direction);
+	softPwmCreate(pinEnable, speed, 100);
 }
 
 void DcMotorClass::stop()
 {
-	
+	digitalWrite (0, LOW); 
+	digitalWrite (0, LOW);
 }
 
 

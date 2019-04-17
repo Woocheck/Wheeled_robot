@@ -10,11 +10,10 @@
 #define __TWO_WHEEL_DRIVE_CLASS_H__
 
 
-#include "avr/io.h"
 #include "pin_settings.h"
 #include "DC_motor_class.h"
 
-enum DemandedDirection {ahead, back, left, right};
+enum VehicleDirection {ahead, back, left, right};
 
 class TwoWheelDriveClass
 {
@@ -23,10 +22,11 @@ public:
 protected:
 private:
 
-DcMotorClass Left_DC;
-DcMotorClass Right_DC;
+DcMotorClass Left_DC(PIN_LEFT_A,PIN_LEFT_B,PIN_LEFT_ENABLE);
+DcMotorClass Right_DC(PIN_RIGHT_A,PIN_RIGHT_B,PIN_RIGHT_ENABLE);
+
 int speed {0};
-Direction direction {forward};
+VehicleDirection direction {VehicleDirection::ahead);
 
 //functions
 public:
