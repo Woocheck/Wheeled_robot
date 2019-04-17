@@ -16,14 +16,7 @@ DcMotorClass::DcMotorClass()
 {
 } //DC_motor_class
 
-DcMotorClass(int a, int b, int enable):
-					pinA {a},
-					pinB {b},
-					pinEnable {enable} {
-	pinMode (pinA, OUTPUT);
-	pinMode (pinB, OUTPUT) ;
-	softPwmCreate(pinEnable, 0, 100);
-};
+
 // default destructor
 DcMotorClass::~DcMotorClass()
 {
