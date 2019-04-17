@@ -7,7 +7,7 @@
 
 #ifndef PIN_SETTINGS_H_
 #define PIN_SETTINGS_H_
-
+/*
 
  
  #define PIN_LEFT_A 21
@@ -18,5 +18,5 @@
  #define PIN_RIGHT_B 29
  #define PIN_RIGHT_ENABLE 24
 
- 
+ */
 #endif /* PIN_SETTINGS_H_ */

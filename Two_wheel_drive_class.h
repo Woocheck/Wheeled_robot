@@ -9,11 +9,12 @@
 #ifndef __TWO_WHEEL_DRIVE_CLASS_H__
 #define __TWO_WHEEL_DRIVE_CLASS_H__
 
-
-#include "pin_settings.h"
+#include <wiringPi.h>
+#include <softPwm.h>
+//#include "pin_settings.h"
 #include "DC_motor_class.h"
 
-enum VehicleDirection {ahead, back, left, right};
+//enum VehicleDirection {ahead, back, left, right};
 
 class TwoWheelDriveClass
 {
@@ -22,15 +23,17 @@ public:
 protected:
 private:
 
-DcMotorClass Left_DC(PIN_LEFT_A,PIN_LEFT_B,PIN_LEFT_ENABLE);
-DcMotorClass Right_DC(PIN_RIGHT_A,PIN_RIGHT_B,PIN_RIGHT_ENABLE);
+DcMotorClass Left_DC;
+DcMotorClass Right_DC;
 
 int speed {0};
-VehicleDirection direction {VehicleDirection::ahead);
+Direction direction {Direction::forward};
 
 //functions
 public:
-	TwoWheelDriveClass();
+	TwoWheelDriveClass():Left_DC(21,22,23), Right_DC(28,29,24) {
+	wiringPiSetupPhys();	
+	};
 	~TwoWheelDriveClass();
 	void setSpeed(int demandedSpeed);
 	void goFoward();

@@ -11,9 +11,9 @@
 
 #include <wiringPi.h>
 #include <softPwm.h>
-#include "./pin_settings.h"
+//#include "./pin_settings.h"
 
-enum class Direction {forward, backward};
+enum class Direction {forward, backward, left, right};
 
 class DcMotorClass
 {
@@ -29,15 +29,8 @@ volatile int speed;
 
 //functions
 public:
-	DcMotorClass() = default;
-	DcMotorClass(int a, int b, int enable):
-					pinA {a},
-					pinB {b},
-					pinEnable {enable} {
-		pinMode (pinA, OUTPUT);
-		pinMode (pinB, OUTPUT) ;
-		softPwmCreate(pinEnable, 0, 100);
-	};
+	DcMotorClass();
+	DcMotorClass(int a, int b, int enable);
 	
 	~DcMotorClass(); 
 				   	

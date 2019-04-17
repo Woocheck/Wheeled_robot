@@ -6,28 +6,42 @@
 */
 
 
-#include "./pin_settings.h"
+//#include "./pin_settings.h"
+#include <unistd.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "./Two_wheel_drive_class.h"
 
 TwoWheelDriveClass drive;
 
 int main(void)
 {
-    drive.goFoward();
-	drive.setSpeed(120);
+    wiringPiSetupPhys();
+    //drive.goFoward();
+    //drive.setSpeed(120);
     while (1) 
     {
+	    /*
 		
-		_delay_ms(1000);
+		usleep(1000000);
 		drive.stop();
-		_delay_ms(1000);
+		usleep(1000000);
 		drive.goFoward();
-		_delay_ms(1000);
+		usleep(1000000);
 		drive.turnLeft();
-		_delay_ms(1000);
+		usleep(1000000);
 		drive.turnRight();
-		_delay_ms(1000);
+		usleep(1000000);
 		drive.goBackward();
+		* */
+	pinMode (22, OUTPUT);
+	pinMode (23, OUTPUT) ;
+	softPwmCreate(24, 0, 100);
+	
+	digitalWrite (23, LOW); 
+	digitalWrite (22, HIGH);
+	softPwmCreate(24, 50, 100);
+	while(1);
 		
     }
 }

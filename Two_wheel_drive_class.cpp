@@ -5,18 +5,19 @@
 * Author: Woocheck
 */
 
-
-#include "./pin_settings.h"
+#include <wiringPi.h>
+#include <softPwm.h>
+//#include "./pin_settings.h"
 #include "./DC_motor_class.h"
 #include "./Two_wheel_drive_class.h"
 
-
+/*
 // default constructor
 TwoWheelDriveClass::TwoWheelDriveClass()
 {
 			
 } //Two_wheel_drive_class
-
+*/
 // default destructor
 TwoWheelDriveClass::~TwoWheelDriveClass()
 {
@@ -30,22 +31,22 @@ void TwoWheelDriveClass::setSpeed(int demandedSpeed)
 };
 void TwoWheelDriveClass::goFoward()
 {
-	Left_DC.contol(forward, speed);
-	Right_DC.contol(forward, speed);
+	Left_DC.contol(Direction::forward, speed);
+	Right_DC.contol(Direction::forward, speed);
 };
 void TwoWheelDriveClass::goBackward()
 {
-	Left_DC.contol(backward, speed);
-	Right_DC.contol(backward, speed);
+	Left_DC.contol(Direction::backward, speed);
+	Right_DC.contol(Direction::backward, speed);
 };
 void TwoWheelDriveClass::turnLeft()
 {
 	Left_DC.stop();
-	Right_DC.contol(forward, speed);
+	Right_DC.contol(Direction::forward, speed);
 };
 void TwoWheelDriveClass::turnRight()
 {
-	Left_DC.contol(forward, speed);
+	Left_DC.contol(Direction::forward, speed);
 	Right_DC.stop();
 };
 void TwoWheelDriveClass::stop()
