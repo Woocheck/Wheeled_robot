@@ -7,7 +7,7 @@
 
 #include <wiringPi.h>
 #include <softPwm.h>
-//#include "./pin_settings.h"
+#include "./pin_settings.h"
 #include "./DC_motor_class.h" 
 
 
@@ -17,7 +17,6 @@ DcMotorClass::DcMotorClass()
 } //DC_motor_class
 DcMotorClass::DcMotorClass(int a, int b, int enable)
 {
-		wiringPiSetupPhys();
 		pinA = a;
 		pinB = b;
 		pinEnable = enable;
@@ -71,12 +70,12 @@ void DcMotorClass::start()
 
 void DcMotorClass::stop()
 {
-	digitalWrite (0, LOW); 
-	digitalWrite (0, LOW);
+	digitalWrite (pinA, LOW); 
+	digitalWrite (pinB, LOW);
 }
 
 
-void DcMotorClass::contol(Direction demandedDirection, int demandedSpeed)
+void DcMotorClass::control(Direction demandedDirection, int demandedSpeed)
 {
 	setDirection(demandedDirection);
 	setSpeed(demandedSpeed); 

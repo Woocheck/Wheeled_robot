@@ -11,7 +11,7 @@
 
 #include <wiringPi.h>
 #include <softPwm.h>
-//#include "./pin_settings.h"
+#include "./pin_settings.h"
 
 enum class Direction {forward, backward, left, right};
 
@@ -39,7 +39,7 @@ public:
 	
 	void start();
 	void stop();
-	void contol(Direction demanded_direction, int demanded_speed);
+	void control(Direction demanded_direction, int demanded_speed);
 	
 private:
 	DcMotorClass( const DcMotorClass &c );
