@@ -11,10 +11,10 @@
 
 #include <wiringPi.h>
 #include <softPwm.h>
-//#include "pin_settings.h"
+#include "pin_settings.h"
 #include "DC_motor_class.h"
 
-//enum VehicleDirection {ahead, back, left, right};
+
 
 class TwoWheelDriveClass
 {
@@ -31,12 +31,12 @@ Direction direction {Direction::forward};
 
 //functions
 public:
-	TwoWheelDriveClass():Left_DC(21,22,23), Right_DC(28,29,24) {
-	wiringPiSetupPhys();	
+	TwoWheelDriveClass():Left_DC(28,29,25),Right_DC(22,23,24){
+		wiringPiSetup();
 	};
 	~TwoWheelDriveClass();
 	void setSpeed(int demandedSpeed);
-	void goFoward();
+	void goForward();
 	void goBackward();
 	void turnLeft();
 	void turnRight();

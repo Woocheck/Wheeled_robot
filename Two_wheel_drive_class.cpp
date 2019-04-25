@@ -7,7 +7,7 @@
 
 #include <wiringPi.h>
 #include <softPwm.h>
-//#include "./pin_settings.h"
+#include "./pin_settings.h"
 #include "./DC_motor_class.h"
 #include "./Two_wheel_drive_class.h"
 
@@ -26,27 +26,27 @@ TwoWheelDriveClass::~TwoWheelDriveClass()
 void TwoWheelDriveClass::setSpeed(int demandedSpeed)
 {
 	speed=demandedSpeed;
-	Left_DC.contol(direction, speed);
-	Right_DC.contol(direction, speed);
+	Left_DC.control(direction, speed);
+	Right_DC.control(direction, speed);
 };
-void TwoWheelDriveClass::goFoward()
+void TwoWheelDriveClass::goForward()
 {
-	Left_DC.contol(Direction::forward, speed);
-	Right_DC.contol(Direction::forward, speed);
+	Left_DC.control(Direction::forward, speed);
+	Right_DC.control(Direction::forward, speed);
 };
 void TwoWheelDriveClass::goBackward()
 {
-	Left_DC.contol(Direction::backward, speed);
-	Right_DC.contol(Direction::backward, speed);
+	Left_DC.control(Direction::backward, speed);
+	Right_DC.control(Direction::backward, speed);
 };
 void TwoWheelDriveClass::turnLeft()
 {
 	Left_DC.stop();
-	Right_DC.contol(Direction::forward, speed);
+	Right_DC.control(Direction::forward, speed);
 };
 void TwoWheelDriveClass::turnRight()
 {
-	Left_DC.contol(Direction::forward, speed);
+	Left_DC.control(Direction::forward, speed);
 	Right_DC.stop();
 };
 void TwoWheelDriveClass::stop()
