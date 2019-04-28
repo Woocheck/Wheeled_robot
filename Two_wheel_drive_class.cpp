@@ -31,21 +31,25 @@ void TwoWheelDriveClass::setSpeed(int demandedSpeed)
 };
 void TwoWheelDriveClass::goForward()
 {
+	direction = Direction::forward;
 	Left_DC.control(Direction::forward, speed);
 	Right_DC.control(Direction::forward, speed);
 };
 void TwoWheelDriveClass::goBackward()
 {
+	direction = Direction::backward;
 	Left_DC.control(Direction::backward, speed);
 	Right_DC.control(Direction::backward, speed);
 };
 void TwoWheelDriveClass::turnLeft()
 {
+	direction = Direction::left;
 	Left_DC.stop();
 	Right_DC.control(Direction::forward, speed);
 };
 void TwoWheelDriveClass::turnRight()
 {
+	direction = Direction::right;
 	Left_DC.control(Direction::forward, speed);
 	Right_DC.stop();
 };
