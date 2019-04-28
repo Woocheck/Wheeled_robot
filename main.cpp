@@ -7,6 +7,7 @@
 
 
 #include <stdio.h>
+#include <iostream>
 #include <errno.h>
 #include <string.h>
 #include "./pin_settings.h"
@@ -25,23 +26,68 @@ int main(void)
     char buf [80] ;
   
     TwoWheelDriveClass drive;
+    int speed {0};
+    char key[8];
     while(1)
     {
-	drive.setSpeed(100);
-	fgets (buf, 80, stdin) ;
-	drive.goForward();
-	fgets (buf, 80, stdin) ;
-	drive.goBackward();
-	fgets (buf, 80, stdin) ;
-	drive.setSpeed(10);
-	fgets (buf, 80, stdin) ;
-	drive.stop();
-	fgets (buf, 80, stdin) ;
-	drive.goForward();
-	fgets (buf, 80, stdin) ;
-	drive.turnLeft();
-	fgets (buf, 80, stdin) ;
-	drive.turnRight();
-	fgets (buf, 80, stdin) ;
+	fgets (key, 80, stdin) ;
+	switch( key[0] )
+	{
+	case 'w':
+	{
+	  drive.goForward();
+	  std::cout << "Forward." << std::endl;
+	  break;
+	}
+	case 's':
+	{
+	  drive.goBackward();
+	  std::cout << "Backward." << std::endl;
+	  break;
+	}
+	case 'a':
+	{
+	  drive.turnLeft();
+	  std::cout << "Left." << std::endl;
+	  break;
+	}
+	case 'd':
+	{
+	  drive.turnRight();
+	  std::cout << "Right." << std::endl;
+	  break;
+	}
+	case ' ':
+	{
+	  if(speed >=10) 
+	  {
+	    speed = speed - 10;
+	    drive.setSpeed( speed );
+	  }
+	  std::cout << "Speed:" << speed << std::endl;	
+	  break;
+	}
+	case 'e':
+	{
+	  if(speed <=90) 
+	  {
+	    speed = speed + 10;
+	    drive.setSpeed( speed );
+	  }
+	  std::cout << "Speed:" << speed << std::endl;
+	  break;
+	}
+	case 'q':
+	{
+	  
+	  drive.stop();
+	  
+	  std::cout << "Stop." << std::endl;
+	  break;
+	}	
+	default:
+	{}
+	break;
+	}
     }
 }
