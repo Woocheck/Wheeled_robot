@@ -11,16 +11,26 @@
 
 class Encoder 
 {
+  //variables
   private:
-    const byte encoder0pinA = 2;//A pin -> the interrupt pin 0
-    const byte encoder0pinB = 3;//B pin -> the digital pin 3
-    int E_left =5; //The enabling of L298PDC motor driver board connection to the digital interface port 5
-    int M_left =4; //The enabling of L298PDC motor driver board connection to the digital interface port 4
+   const int pinA;
+   const int pinB;
+   int encoder0PinALast;
+   double duration,abs_duration;//the number of the pulses
+   bool Direction;//the rotation direction
+   bool result;
+  
+  //functions
+  public:
+  Encoder() = default;
+  Encoder( int a, int b ):
+         pinA { a },
+         pinB { b }
+  {
+      pinMode ( pinA, INPUT ) ;
+	   pinMode ( pinB, INPUT ) ;
+  }
 
-byte encoder0PinALast;
-double duration,abs_duration;//the number of the pulses
-boolean Direction;//the rotation direction
-boolean result;
 
 double val_output;//Power supplied to the motor PWM value.
 double Setpoint;
