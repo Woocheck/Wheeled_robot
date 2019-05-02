@@ -5,25 +5,18 @@
 * Author: Woocheck
 */
 
-#include <wiringPi.h>
-#include <softPwm.h>
-#include "./pin_settings.h"
-#include "./DC_motor_class.h" 
+#include </home/user/workspace_project/wiring/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiring/wiringPi/wiringPi/softPwm.h>
+#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
+#include "/home/user/workspace_project/Wheeled_robot/DC_motor_class.h" 
 
 
 // default constructor
 DcMotorClass::DcMotorClass()
 {
 } //DC_motor_class
-DcMotorClass::DcMotorClass(int a, int b, int enable)
-{
-		pinA = a;
-		pinB = b;
-		pinEnable = enable;
-		pinMode (pinA, OUTPUT);
-		pinMode (pinB, OUTPUT) ;
-		softPwmCreate(pinEnable, 0, 100);
-};
+
+
 // default destructor
 DcMotorClass::~DcMotorClass()
 {
@@ -34,13 +27,13 @@ void DcMotorClass::setDirection(Direction demandedDirection)
 	DcMotorClass::direction=demandedDirection;
 	if (direction==Direction::forward)
 	{
-		digitalWrite (pinA, HIGH); 
-		digitalWrite (pinB,  LOW); 
+		digitalWrite (0, HIGH); 
+		digitalWrite (0,  LOW); 
 	}
 	else if(direction==Direction::backward)
 	{
-		digitalWrite (pinA, LOW); 
-		digitalWrite (pinB,  HIGH);
+		digitalWrite (0, LOW); 
+		digitalWrite (0,  HIGH);
 	}
 }
 
@@ -50,32 +43,32 @@ void DcMotorClass::setSpeed(volatile int demandedSpeed)
 	speed = demandedSpeed;
 	if(demandedSpeed<0)
 	{
-		softPwmWrite(pinEnable, speed);
+		softPwmCreate(pinEnable, speed, 100);
 	}
 	else if(demandedSpeed>255)
 	{
-		softPwmWrite(pinEnable, speed);
+		softPwmCreate(pinEnable, speed, 100);
 	}
 	else
 	{
-		softPwmWrite(pinEnable, speed);
+		softPwmCreate(pinEnable, speed, 100);
 	}
 }
 
 void DcMotorClass::start()
 {
 	setDirection(direction);
-	softPwmWrite(pinEnable, speed);
+	softPwmCreate(pinEnable, speed, 100);
 }
 
 void DcMotorClass::stop()
 {
-	digitalWrite (pinA, LOW); 
-	digitalWrite (pinB, LOW);
+	digitalWrite (0, LOW); 
+	digitalWrite (0, LOW);
 }
 
 
-void DcMotorClass::control(Direction demandedDirection, int demandedSpeed)
+void DcMotorClass::contol(Direction demandedDirection, int demandedSpeed)
 {
 	setDirection(demandedDirection);
 	setSpeed(demandedSpeed); 
