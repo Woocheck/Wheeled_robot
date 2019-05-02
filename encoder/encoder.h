@@ -8,6 +8,7 @@
 #include </home/user/workspace_project/wiring/wiringPi/wiringPi/wiringPi.h>
 #include </home/user/workspace_project/wiring/wiringPi/wiringPi/softPwm.h>
 #include "../pin_settings.h"
+#include "/home/user/workspace_project/Wheeled_robot/DC_motor_class.h"
 
 class Encoder 
 {
@@ -16,8 +17,8 @@ class Encoder
    const int pinA;
    const int pinB;
    int encoder0PinALast;
-   double duration,abs_duration;//the number of the pulses
-   bool Direction;//the rotation direction
+   int numberOfPulses,absNumberOfPulses;
+   Direction rotationDirection;
    bool result;
   
   //functions
@@ -28,8 +29,11 @@ class Encoder
          pinB { b }
   {
       pinMode ( pinA, INPUT ) ;
-	   pinMode ( pinB, INPUT ) ;
-  }
+	    pinMode ( pinB, INPUT ) ;
+      rotationDirection = Direction::forward;
+      wiringPiISR( pinA, INT_EDGE_BOTH, CHANGE);
+  };
+  
 
 
 double val_output;//Power supplied to the motor PWM value.
@@ -65,9 +69,9 @@ void loop()
 
 void EncoderInit()
 {
-  Direction = true;//default -> Forward
+  
   pinMode(encoder0pinB,INPUT);
-  attachInterrupt(0, wheelSpeed, CHANGE);
+  
 }
 
 void wheelSpeed()
