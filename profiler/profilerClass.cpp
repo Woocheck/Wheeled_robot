@@ -29,17 +29,17 @@ int Profiler::calculateTheRotation()
 {
    if(status == ProfilerStatus::drive) 
  { 
-     if(currentSpeed * ((currentSpeed + 128) >> 8)/(2 * givenAcceleration) >= std::abs(target_T) - std::abs(zad_T)) 
+     if(currentSpeed * ((currentSpeed + 128) >> 8)/(2 * givenAcceleration) >= std::abs(targetAngle) - std::abs(calculatedRotation)) 
      { 
          status = ProfilerStatus::braking; 
-         docelowa_T_8 = nextStepTargetSpeed; 
+         targetSpeed = nextStepTargetSpeed; 
      } 
  } 
  
  if(status == ProfilerStatus::braking && currentSpeed == 0) 
  { 
      status = ProfilerStatus::end; 
-     docelowa_T_8 = nextStepTargetSpeed; 
+     targetSpeed = nextStepTargetSpeed; 
  } 
  
  if(currentSpeed < targetSpeed) 
@@ -56,7 +56,7 @@ int Profiler::calculateTheRotation()
          currentSpeed = targetSpeed; 
  } 
  
- if(target_T > 0) 
+ if(targetAngle > 0) 
      calculatedRotation += ((currentSpeed + 128) >> 8); 
  else 
      calculatedRotation -= ((currentSpeed + 128) >> 8);
