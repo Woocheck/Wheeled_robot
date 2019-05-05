@@ -5,10 +5,10 @@
 * Author: Woocheck
 */
 
-#include </home/user/workspace_project/wiring/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiring/wiringPi/wiringPi/softPwm.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
 #include "../pin_settings.h"
-#include "/home/user/workspace_project/Wheeled_robot/DC_motor_class.h"
+#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
 
 class Encoder 
 {

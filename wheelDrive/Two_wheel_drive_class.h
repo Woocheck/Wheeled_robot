@@ -9,10 +9,10 @@
 #ifndef __TWO_WHEEL_DRIVE_CLASS_H__
 #define __TWO_WHEEL_DRIVE_CLASS_H__
 
-#include <wiringPi.h>
-#include <softPwm.h>
-#include "pin_settings.h"
-#include "DC_motor_class.h"
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
+#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
 
 
 

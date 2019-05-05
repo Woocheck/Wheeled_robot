@@ -9,8 +9,8 @@
 #ifndef __DC_MOTOR_CLASS_H__
 #define __DC_MOTOR_CLASS_H__
 
-#include </home/user/workspace_project/wiring/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiring/wiringPi/wiringPi/softPwm.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
 #include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
 
 enum class Direction {forward, backward};
