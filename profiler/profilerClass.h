@@ -11,21 +11,21 @@
 
 enum class ProfilerStatus {drive, braking, end};
 
-class Profiler 
+class RotationProfiler 
 {
    private:
    ProfilerStatus status {ProfilerStatus::drive};
    int targetSpeed  {50};        // docelowa_T - docelowa prędkość, do której stopniowo dąży profiler 
                                  // max_T - maksymalna dozwolona prędkość 
-   int nextStepTargetSpeed {50};
+   int nextStepSpeed {50};
    int currentSpeed {0};         // aktualnie zadana prędkość 
-   int givenAcceleration {10};                // zadane przyspieszenie 
-   int calculatedRotation {0};           // wyliczony kąt do przejechania - wykorzystywany jako setpoint regulatora PD 
-   int targetAngle {45};                // zadany całkowity kąt do przejechania
+   int givenAcceleration {10};   // zadane przyspieszenie 
+   int calculatedRotation {0};   // wyliczony kąt do przejechania - wykorzystywany jako setpoint regulatora PD 
+   int targetAngle {45};         // zadany całkowity kąt do przejechania
    
    public:
-   Profiler() = default;
-   Profiler(int max): targetSpeed{max}{};
+   RotationProfiler() = default;
+   RotationProfiler(int max, int next): targetSpeed{max}, nextStepSpeed{next}{};
    
    int getCalculatedRotation();
 
@@ -37,7 +37,8 @@ class Profiler
 
    private:
    int calculateTheRotation();
-   int Profiler::calculateTheTranslation();
+   int calculateTheTranslation();
+   bool isNecessaryToBrake();
 };   
 
 #endif
