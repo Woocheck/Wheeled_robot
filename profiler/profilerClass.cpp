@@ -7,39 +7,39 @@
 #include <cstdlib>
 #include "profilerClass.h"
 
-int Profiler::getCalculatedRotation()
+int RotationProfiler::getCalculatedRotation()
 {
    return calculateTheRotation();
 };
-void Profiler::setGivenAcceleration(const int acceleration)
+void RotationProfiler::setGivenAcceleration(const int acceleration)
 {
    givenAcceleration = acceleration;
 };
 int getGivenAcceleration();
 
-void Profiler::setTargetSpeed(const int speed)
+void RotationProfiler::setTargetSpeed(const int speed)
 {
    targetSpeed = speed;
 };
-int Profiler::getTargetSpeed()
+int RotationProfiler::getTargetSpeed()
 {
    return targetSpeed;
 };
-int Profiler::calculateTheRotation()
+int RotationProfiler::calculateTheRotation()
 {
    if(status == ProfilerStatus::drive) 
  { 
      if(currentSpeed * ((currentSpeed + 128) >> 8)/(2 * givenAcceleration) >= std::abs(targetAngle) - std::abs(calculatedRotation)) 
      { 
          status = ProfilerStatus::braking; 
-         targetSpeed = nextStepTargetSpeed; 
+         targetSpeed = nextStepSpeed; 
      } 
  } 
  
  if(status == ProfilerStatus::braking && currentSpeed == 0) 
  { 
      status = ProfilerStatus::end; 
-     targetSpeed = nextStepTargetSpeed; 
+     targetSpeed = nextStepSpeed; 
  } 
  
  if(currentSpeed < targetSpeed) 
