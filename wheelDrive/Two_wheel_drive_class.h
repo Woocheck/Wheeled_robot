@@ -23,6 +23,16 @@ public:
 protected:
 private:
 
+double currentTranslationError {0}; 
+double distanceToGo {0}; 
+double totalDistanceFromEnkoder {0};  
+   
+double currentRotationError {0}; 
+double angleToGo {0}; 
+double totalAngleFromEnkoder {0};                
+   
+int minimalPWM {0}, maximalPWM {100};
+
 DcMotorClass Left_DC;
 DcMotorClass Right_DC;
 

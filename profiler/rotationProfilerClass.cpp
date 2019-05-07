@@ -11,16 +11,19 @@ int RotationProfiler::getCalculatedRotation()
 {
    return calculateTheRotation();
 };
+
 void RotationProfiler::setGivenAcceleration( const int acceleration )
 {
    givenAcceleration = acceleration;
 };
+
 int getGivenAcceleration();
 
 void RotationProfiler::setTargetSpeed( const int speed )
 {
    targetSpeed = speed;
 };
+
 int RotationProfiler::getTargetSpeed()
 {
    return targetSpeed;
@@ -32,40 +35,37 @@ bool RotationProfiler::isNecessaryToBrake()
                 std::abs( targetAngle ) - std::abs( calculatedRotation ) );
 };
 
-
 int RotationProfiler::calculateTheRotation()
 {
    if( status == ProfilerStatus::drive ) 
- { 
+   { 
      if(isNecessaryToBrake()) 
      { 
          status = ProfilerStatus::braking; 
          targetSpeed = nextStepSpeed; 
      } 
- } 
+    } 
  
- if( status == ProfilerStatus::braking && currentSpeed == 0 ) 
- { 
+    if( status == ProfilerStatus::braking && currentSpeed == 0 ) 
+    { 
      status = ProfilerStatus::end; 
      targetSpeed = nextStepSpeed; 
- } 
+    } 
  
- if( currentSpeed < targetSpeed ) 
- { 
+    if( currentSpeed < targetSpeed ) 
+    { 
      currentSpeed += givenAcceleration; 
-     if( currentSpeed > targetSpeed ) 
-         currentSpeed = targetSpeed; 
- } 
+     if( currentSpeed > targetSpeed ) currentSpeed = targetSpeed; 
+    } 
  
- if( currentSpeed > targetSpeed ) 
- { 
+    if( currentSpeed > targetSpeed ) 
+    { 
      currentSpeed -= givenAcceleration; 
-     if( currentSpeed < targetSpeed ) 
-         currentSpeed = targetSpeed; 
- } 
+     if( currentSpeed < targetSpeed ) currentSpeed = targetSpeed; 
+    } 
  
- if( targetAngle > 0 ) 
+    if( targetAngle > 0 ) 
      calculatedRotation += ( ( currentSpeed + 128 ) >> 8 ); 
- else 
+    else 
      calculatedRotation -= ( ( currentSpeed + 128 ) >> 8 );
 };

@@ -38,7 +38,6 @@ class RotationProfiler
 
    private:
    int calculateTheRotation();
-   int calculateTheTranslation();
    bool isNecessaryToBrake();
 };   
 
