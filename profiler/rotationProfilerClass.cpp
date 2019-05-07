@@ -1,5 +1,5 @@
 /* 
-* profilerClass.h.h
+* rotationProfilerClass.h.h
 *
 * Created: 01.05.2019
 * Author: Woocheck
