@@ -16,14 +16,12 @@ void TranslationProfiler::setGivenAcceleration( const int acceleration )
 {
    givenAcceleration = acceleration;
 };
-
 int getGivenAcceleration();
 
 void TranslationProfiler::setTargetSpeed( const int speed )
 {
    targetSpeed = speed;
 };
-
 int TranslationProfiler::getTargetSpeed()
 {
    return targetSpeed;
