@@ -20,7 +20,7 @@ class RegulatorPD
    double minimalValue;
    double proportionalParameter;
    double derivateParameter;
-   double previousError;
+   double previousError {0};
    double integral;
 
    public:
@@ -31,8 +31,8 @@ class RegulatorPD
                proportionalParameter ( Kp ),
                derivateParameter ( Kd ) {};
    ~RegulatorPD() {};
-   double calculate( double );
    
+   double calculate( double );
 };   
 
 #endif
