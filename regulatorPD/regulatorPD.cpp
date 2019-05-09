@@ -1,32 +1,22 @@
 
 #include "./regulatorPDClass.h"
 
-double RegulatorPD::calculate(double pe)
+double RegulatorPD::calculate(double error)
 {
-   previousError = pe;
+   
+    double outputP = proportionalParameter * error; 
 
-   // Calculate error
-    double error = setpoint - pv;
+    double derivative = (error - previousError);
+    double outputD = derivateParameter * derivative;
 
-    // Proportional term
-    double Pout = _Kp * error;
+    double output = outputP + outputD;
 
+    if( output > maximalValue )
+        output = maximalValue;
+    else if( output < minimalValue )
+        output = minimalValue;
 
-    // Derivative term
-    double derivative = (error - _pre_error) / _dt;
-    double Dout = _Kd * derivative;
+    previousError = error;
 
-    // Calculate total output
-    double output = Pout + Iout + Dout;
-
-    // Restrict to max/min
-    if( output > _max )
-        output = _max;
-    else if( output < _min )
-        output = _min;
-
-    // Save error to previous error
-    _pre_error = error;
-
-    return output
+    return output;
 };
