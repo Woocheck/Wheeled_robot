@@ -23,4 +23,5 @@
 
  #define PIN_ENCODER_RIGHT_A 3
  #define PIN_ENCODER_RIGHT_B 4
+ 
 #endif /* PIN_SETTINGS_H_ */
