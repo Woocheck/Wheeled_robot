@@ -32,3 +32,8 @@ void Encoder::readDistance()
   else  numberOfPulses--;
 
 }
+
+int Encoder::getNumeberOfPulses()
+{
+  return numberOfPulses;
+};

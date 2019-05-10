@@ -40,6 +40,7 @@ class Encoder
   }
   
   void readDistance();
+  int getNumeberOfPulses();
 
       
 };
