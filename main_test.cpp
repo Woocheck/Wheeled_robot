@@ -16,18 +16,16 @@
 #include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
 #include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
 #include "/home/user/workspace_project/Wheeled_robot/wheelDrive/Two_wheel_drive_class.h"
-#include "/home/user/workspace_project/Wheeled_robot/encoder/encoder.h"
 #include <vector>
 
 
-TwoWheelDriveClass drive;
 
 int main(void)
 {
     wiringPiSetup ()  ;
     char buf [80] ;
   
-    
+    TwoWheelDriveClass drive;
     int speed {0};
     char key[8];
     while(1)
