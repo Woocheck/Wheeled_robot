@@ -10,14 +10,17 @@
 #include <iostream>
 #include <errno.h>
 #include <string.h>
-#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
+#include <vector>
 #include <unistd.h>
+
 #include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
 #include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+
+#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
+
 #include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
 #include "/home/user/workspace_project/Wheeled_robot/wheelDrive/Two_wheel_drive_class.h"
 #include "/home/user/workspace_project/Wheeled_robot/encoder/encoder.h"
-#include <vector>
 
 
 TwoWheelDriveClass drive;
@@ -30,66 +33,9 @@ int main(void)
     
     int speed {0};
     char key[8];
-    while(1)
-    {
-	fgets (key, 80, stdin) ;
-	switch( key[0] )
-	{
-	case 'w':
-	{
-	  drive.goForward();
-	  std::cout << "Forward." << std::endl;
-	  break;
-	}
-	case 's':
-	{
-	  drive.goBackward();
-	  std::cout << "Backward." << std::endl;
-	  break;
-	}
-	case 'a':
-	{
-	  drive.turnLeft();
-	  std::cout << "Left." << std::endl;
-	  break;
-	}
-	case 'd':
-	{
-	  drive.turnRight();
-	  std::cout << "Right." << std::endl;
-	  break;
-	}
-	case ' ':
-	{
-	  if(speed >=10) 
-	  {
-	    speed = speed - 10;
-	    drive.setSpeed( speed );
-	  }
-	  std::cout << "Speed:" << speed << std::endl;	
-	  break;
-	}
-	case 'e':
-	{
-	  if(speed <=90) 
-	  {
-	    speed = speed + 10;
-	    drive.setSpeed( speed );
-	  }
-	  std::cout << "Speed:" << speed << std::endl;
-	  break;
-	}
-	case 'q':
-	{
-	  
-	  drive.stop();
-	  
-	  std::cout << "Stop." << std::endl;
-	  break;
-	}	
-	default:
-	{}
-	break;
-	}
-    }
+		while(1)
+		{
+			
+		}
+
 }
