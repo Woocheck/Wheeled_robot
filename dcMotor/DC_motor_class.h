@@ -13,22 +13,23 @@
 #include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
 #include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
 
-enum class Direction {forward, backward};
+enum class Direction {forward, backward, left, right};
 
 class DcMotorClass
 {
-//variables
+
 private:
 
-volatile int  pinA;
-volatile int  pinB;
-volatile int  pinEnable;
+	volatile int  pinA;
+	volatile int  pinB;
+	volatile int  pinEnable;
 
-volatile Direction direction = Direction::forward;
-volatile int speed;
+	volatile Direction direction = Direction::forward;
+	volatile int speed;
 
-//functions
+
 public:
+	
 	DcMotorClass() = default;
 	DcMotorClass(int a, int b, int enable):
 					pinA {a},
@@ -46,12 +47,12 @@ public:
 	
 	void start();
 	void stop();
-	void contol(Direction demanded_direction, int demanded_speed);
+	void control(Direction demanded_direction, int demanded_speed);
 	
 private:
 	DcMotorClass( const DcMotorClass &c );
 	DcMotorClass& operator=( const DcMotorClass &c );
 
-}; //DcMmotorClass
+}; 
 
-#endif //__DC_MOTOR_CLASS_H__
+#endif 

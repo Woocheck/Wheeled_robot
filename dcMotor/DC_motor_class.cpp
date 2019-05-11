@@ -5,22 +5,22 @@
 * Author: Woocheck
 */
 
-#include </home/user/workspace_project/wiring/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiring/wiringPi/wiringPi/softPwm.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
 #include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
-#include "/home/user/workspace_project/Wheeled_robot/DC_motor_class.h" 
+#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h" 
 
 
-// default constructor
+
 DcMotorClass::DcMotorClass()
 {
-} //DC_motor_class
+} 
 
 
-// default destructor
+
 DcMotorClass::~DcMotorClass()
 {
-} //~DC_motor_class
+}
 
 void DcMotorClass::setDirection(Direction demandedDirection)
 {
@@ -68,7 +68,7 @@ void DcMotorClass::stop()
 }
 
 
-void DcMotorClass::contol(Direction demandedDirection, int demandedSpeed)
+void DcMotorClass::control(Direction demandedDirection, int demandedSpeed)
 {
 	setDirection(demandedDirection);
 	setSpeed(demandedSpeed); 
