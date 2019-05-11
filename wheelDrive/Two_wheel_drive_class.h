@@ -14,7 +14,7 @@
 #include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
 #include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
 #include "/home/user/workspace_project/Wheeled_robot/regulatorPD/regulatorPDClass.h"
-
+#include "/home/user/workspace_project/Wheeled_robot/encoder/encoder.h"
 
 class TwoWheelDriveClass
 {
@@ -77,6 +77,6 @@ private:
 	TwoWheelDriveClass( const TwoWheelDriveClass &c );
 	TwoWheelDriveClass& operator=( const TwoWheelDriveClass &c );
 
-}; //Two_wheel_drive_class
+}; 
 
-#endif //__TWO_WHEEL_DRIVE_CLASS_H__
+#endif 
