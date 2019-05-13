@@ -35,7 +35,12 @@ int main(void)
     char key[8];
 		while(1)
 		{
-			
+      if(drive.isMoveFinished())
+      {
+			auto currentState = lineSensor.getState();
+      auto nextMove = positionInterpreter.calculate(currentState);
+      drive.control(nextMove);
+      }
 		}
 
 }
