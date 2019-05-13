@@ -5,7 +5,7 @@
 * Author: Woocheck
 */
 #include <cstdlib>
-#include "translationProfilerClass.h"
+#include "translationProfiler.h"
 
 int TranslationProfiler::getCalculatedTranslation()
 {
