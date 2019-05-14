@@ -37,9 +37,9 @@ int main(void)
 		{
       if(drive.isMoveFinished())
       {
-			auto currentState = lineSensor.getState();
-      auto nextMove = positionInterpreter.calculate(currentState);
-      drive.control(nextMove);
+			//auto currentState = lineSensor.getState();
+      //auto nextMove = positionInterpreter.calculate(currentState);
+      //drive.control(nextMove);
       }
 		}
 
