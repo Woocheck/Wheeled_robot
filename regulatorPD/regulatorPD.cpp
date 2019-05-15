@@ -1,5 +1,5 @@
 
-#include "./regulatorPDClass.h"
+#include "./regulatorPD.h"
 
 double RegulatorPD::calculate(double error)
 {
