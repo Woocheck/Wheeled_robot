@@ -15,6 +15,9 @@
 #include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
 #include "/home/user/workspace_project/Wheeled_robot/regulatorPD/regulatorPD.h"
 #include "/home/user/workspace_project/Wheeled_robot/encoder/encoder.h"
+#include "/home/user/workspace_project/Wheeled_robot/profiler/translationProfiler.h"
+#include "/home/user/workspace_project/Wheeled_robot/profiler/rotationProfiler.h"
+
 
 class TwoWheelDrive
 {
@@ -37,6 +40,9 @@ class TwoWheelDrive
 
 		Encoder encoderLeft;
 		Encoder encoderRight;
+
+		TranslationProfiler translationProfiler;
+		RotationProfiler rotationProfiler;
 
 		RegulatorPD translationRegulator;
 		RegulatorPD rotationRegulator;
@@ -68,6 +74,7 @@ class TwoWheelDrive
 		void stop();
 		void setNewTask(int newTranslation, int newRotation);
 		void readEncoders();
+		void calculateCorrectionsForDrive();
 	
 	private:
 		TwoWheelDrive( const TwoWheelDrive &c );

@@ -62,6 +62,7 @@ void TwoWheelDrive::setNewTask(int newTranslation,
 {
 	distanceToGo = newTranslation;
 	angleToGo = newRotation;
+	
 }
 
 void TwoWheelDrive::readEncoders()
@@ -69,3 +70,18 @@ void TwoWheelDrive::readEncoders()
 	encoderLeft.readDistance();
 	encoderRight.readDistance();
 }
+
+void TwoWheelDrive::calculateCorrectionsForDrive()
+{
+	int translation = encoderLeft.getNumeberOfPulses() + encoderRight.getNumeberOfPulses() ; 
+	double translationError = translationProfiler.getCalculatedTranslation() - translation ;
+	int newTranslationSets = translationRegulator.calculate( translationError ) ;
+
+	int rotation = encoderLeft.getNumeberOfPulses() - encoderRight.getNumeberOfPulses() ;
+	double rotationError = rotationProfiler.getCalculatedRotation() - rotation ;
+	int newRotationSets = rotationRegulator.calculate( rotationError ) ;
+
+	Left_DC.control( Direction::forward , newTranslationSets + newRotationSets ) ;
+	Right_DC.control( Direction::forward , newTranslationSets - newRotationSets ) ;
+
+};
