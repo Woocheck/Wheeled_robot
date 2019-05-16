@@ -72,7 +72,7 @@ class TwoWheelDrive
 		void turnLeft();
 		void turnRight();
 		void stop();
-		void setNewTask(int newTranslation, int newRotation);
+		void setNewDistanceToBeTraveled(int newTranslation, int newRotation);
 		void readEncoders();
 		void calculateCorrectionsForDrive();
 	

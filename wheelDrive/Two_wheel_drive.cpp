@@ -57,7 +57,7 @@ void TwoWheelDrive::stop()
 	Right_DC.stop();
 };
 
-void TwoWheelDrive::setNewTask(int newTranslation, 
+void TwoWheelDrive::setNewDistanceToBeTraveled(int newTranslation, 
 												int newRotation )
 {
 	distanceToGo = newTranslation;
@@ -85,3 +85,4 @@ void TwoWheelDrive::calculateCorrectionsForDrive()
 	Right_DC.control( Direction::forward , newTranslationSets - newRotationSets ) ;
 
 };
+
