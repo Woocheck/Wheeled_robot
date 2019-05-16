@@ -19,7 +19,7 @@ class TranslationProfiler
    int nextStepSpeed {50};
    int currentSpeed {0};      
    int givenAcceleration {10};   
-   int calculatedTranslation {0};   
+   int calculatedRoad {0};   
    int targetRoad {45};        
    
    public:

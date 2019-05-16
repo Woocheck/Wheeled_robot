@@ -21,6 +21,7 @@ int getGivenAcceleration();
 void TranslationProfiler::setTargetSpeed( const int speed )
 {
    targetSpeed = speed;
+   nextStepSpeed = speed;
 };
 int TranslationProfiler::getTargetSpeed()
 {
@@ -30,7 +31,7 @@ int TranslationProfiler::getTargetSpeed()
 bool TranslationProfiler::isNecessaryToBrake()
 {
     return ( ( currentSpeed * currentSpeed ) / ( 2 * givenAcceleration ) >=
-                std::abs( targetRoad ) - std::abs( calculatedTranslation ) );
+                std::abs( targetRoad ) - std::abs( calculatedRoad ) );
 };
 
 int TranslationProfiler::calculateTheTranslation()
@@ -44,7 +45,7 @@ int TranslationProfiler::calculateTheTranslation()
      } 
     }
  
-    if( status == ProfilerStatus::braking && currentSpeed == 0 ) 
+    if( calculatedRoad >= targetRoad || ( status == ProfilerStatus::braking && currentSpeed == 0 ) ) 
     { 
      status = ProfilerStatus::end; 
      targetSpeed = nextStepSpeed; 
@@ -62,6 +63,6 @@ int TranslationProfiler::calculateTheTranslation()
      if( currentSpeed < targetSpeed ) currentSpeed = targetSpeed; 
     } 
  
-    calculatedTranslation += ( ( currentSpeed + 128 ) >> 8 ); 
+    calculatedRoad += ( ( currentSpeed + 128 ) >> 8 ); 
  
 };
