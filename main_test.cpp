@@ -10,27 +10,37 @@
 #include <iostream>
 #include <errno.h>
 #include <string.h>
-#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
-#include <unistd.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
-#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
-#include "/home/user/workspace_project/Wheeled_robot/wheelDrive/Two_wheel_drive_class.h"
 #include <vector>
+#include <unistd.h>
 
+#include <wiringPi.h>
+#include <softPwm.h>
+
+#include "./pin_settings.h"
+
+#include "./dcMotor/DC_motor_class.h"
+#include "./wheelDrive/Two_wheel_drive.h"
+#include "./encoder/encoder.h"
+
+
+void readEncodersChange();
 
 
 int main(void)
 {
-    wiringPiSetup ()  ;
-    char buf [80] ;
-  
-    TwoWheelDriveClass drive;
+    if(wiringPiSetup() == -1)
+    { 
+	printf("setup wiringPi failed !");
+	return 1; 
+    }
+    
+  char buf [80] ;
+
+    TwoWheelDrive drive;
     int speed {0};
     char key[8];
     while(1)
-    {
-	fgets (key, 80, stdin) ;
+    {fgets (key, 80, stdin) ;
 	switch( key[0] )
 	{
 	case 'w':
@@ -79,9 +89,9 @@ int main(void)
 	}
 	case 'q':
 	{
-	  
+
 	  drive.stop();
-	  
+
 	  std::cout << "Stop." << std::endl;
 	  break;
 	}	
@@ -91,3 +101,8 @@ int main(void)
 	}
     }
 }
+
+void readEncodersChange()
+{
+  //drive.readEncoders();
+};
