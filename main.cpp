@@ -13,8 +13,8 @@
 #include <vector>
 #include <unistd.h>
 
-#include <wiringPi.h>
-#include <softPwm.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
 
 #include "./pin_settings.h"
 
@@ -24,19 +24,19 @@
 
 
 void readEncodersChange();
-
+TwoWheelDrive drive;
 
 int main(void)
 {
-    if(wiringPiSetup() == -1)
-    { 
-	printf("setup wiringPi failed !");
-	return 1; 
-    }
+  if(wiringPiSetup() == -1)
+  { 
+		printf("setup wiringPi failed !");
+		return 1; 
+  }
     
   char buf [80] ;
 
-    TwoWheelDrive drive;
+    
     int speed {0};
     char key[8];
     while(1)
@@ -104,5 +104,5 @@ int main(void)
 
 void readEncodersChange()
 {
-  //drive.readEncoders();
+  drive.readEncoders();
 };

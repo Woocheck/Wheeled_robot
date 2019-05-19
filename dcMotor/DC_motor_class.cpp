@@ -6,10 +6,10 @@
 */
 
 #include <iostream>
-#include <wiringPi.h>
-#include <softPwm.h>
-#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
-#include "/home/pi/Wheel/Wheeled_robot/dcMotor/DC_motor_class.h" 
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include "../pin_settings.h"
+#include "../dcMotor/DC_motor_class.h" 
 
 
 

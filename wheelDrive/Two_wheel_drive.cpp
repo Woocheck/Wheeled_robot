@@ -5,15 +5,16 @@
 * Author: Woocheck
 */
 
-#include <wiringPi.h>
-#include <softPwm.h>
-#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
+#include <iostream>
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include "../pin_settings.h"
 
-#include "/home/pi/Wheel/Wheeled_robot/dcMotor/DC_motor_class.h"
-#include "/home/pi/Wheel/Wheeled_robot/wheelDrive/Two_wheel_drive.h"
+#include "../dcMotor/DC_motor_class.h"
+#include "./Two_wheel_drive.h"
 
-#include "/home/pi/Wheel/Wheeled_robot/regulatorPD/regulatorPD.h"
-#include "/home/pi/Wheel/Wheeled_robot/encoder/encoder.h"
+#include "../regulatorPD/regulatorPD.h"
+#include "../encoder/encoder.h"
 
 
 TwoWheelDrive::~TwoWheelDrive()
@@ -84,5 +85,11 @@ void TwoWheelDrive::calculateCorrectionsForDrive()
 	Left_DC.control( Direction::forward , newTranslationSets + newRotationSets ) ;
 	Right_DC.control( Direction::forward , newTranslationSets - newRotationSets ) ;
 
+};
+
+void TwoWheelDrive::printEncodersNumberOfPulses()
+{
+	std::cout << encoderLeft.getNumeberOfPulses() << std::endl;
+	std::cout << encoderRight.getNumeberOfPulses() << std::endl;
 };
 

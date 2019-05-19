@@ -9,14 +9,14 @@
 #ifndef __TWO_WHEEL_DRIVE_CLASS_H__
 #define __TWO_WHEEL_DRIVE_CLASS_H__
 
-#include <wiringPi.h>
-#include <softPwm.h>
-#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
-#include "/home/pi/Wheel/Wheeled_robot/dcMotor/DC_motor_class.h"
-#include "/home/pi/Wheel/Wheeled_robot/regulatorPD/regulatorPD.h"
-#include "/home/pi/Wheel/Wheeled_robot/encoder/encoder.h"
-#include "/home/pi/Wheel/Wheeled_robot/profiler/translationProfiler.h"
-#include "/home/pi/Wheel/Wheeled_robot/profiler/rotationProfiler.h"
+#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
+#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include "../pin_settings.h"
+#include "../dcMotor/DC_motor_class.h"
+#include "../regulatorPD/regulatorPD.h"
+#include "../encoder/encoder.h"
+#include "../profiler/translationProfiler.h"
+#include "../profiler/rotationProfiler.h"
 
 
 class TwoWheelDrive
@@ -75,6 +75,7 @@ class TwoWheelDrive
 		void setNewDistanceToBeTraveled(int newTranslation, int newRotation);
 		void readEncoders();
 		void calculateCorrectionsForDrive();
+		void printEncodersNumberOfPulses();
 	
 	private:
 		TwoWheelDrive( const TwoWheelDrive &c );

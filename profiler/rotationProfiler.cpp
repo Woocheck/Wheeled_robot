@@ -5,7 +5,7 @@
 * Author: Woocheck
 */
 #include <cstdlib>
-#include "profilerClass.h"
+#include "./rotationProfiler.h"
 
 int RotationProfiler::getCalculatedRotation()
 {
