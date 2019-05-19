@@ -5,10 +5,13 @@
 * Author: Woocheck
 */
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#ifndef __ENCODER_H__
+#define __ENCODER_H__
+
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "../pin_settings.h"
-#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
+#include "../dcMotor/DC_motor_class.h"
 
 class Encoder 
 {
@@ -32,6 +35,7 @@ class Encoder
          pinA { a },
          pinB { b }
   {
+      wiringPiSetup();
       pinMode ( pinA, INPUT ) ;
       pullUpDnControl (pinA, PUD_UP);
 	    pinMode ( pinB, INPUT ) ;
@@ -46,5 +50,5 @@ class Encoder
 };
   
 
-
+#endif
 

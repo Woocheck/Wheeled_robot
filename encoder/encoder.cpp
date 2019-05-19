@@ -5,8 +5,8 @@
 * Author: Woocheck
 */
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "../pin_settings.h"
 
 #include "./encoder.h"
@@ -37,3 +37,4 @@ int Encoder::getNumeberOfPulses()
 {
   return numberOfPulses;
 };
+

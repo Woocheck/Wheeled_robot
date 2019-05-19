@@ -13,8 +13,8 @@
 #include <vector>
 #include <unistd.h>
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 
 #include "./pin_settings.h"
 
@@ -28,11 +28,7 @@ TwoWheelDrive drive;
 
 int main(void)
 {
-  if(wiringPiSetup() == -1)
-  { 
-		printf("setup wiringPi failed !");
-		return 1; 
-  }
+  wiringPiSetup();
     
   char buf [80] ;
 
@@ -47,25 +43,29 @@ int main(void)
 	{
 	  drive.goForward();
 	  std::cout << "Forward." << std::endl;
+		drive.printEncodersNumberOfPulses();
 	  break;
 	}
 	case 's':
 	{
 	  drive.goBackward();
 	  std::cout << "Backward." << std::endl;
-	  break;
+	  drive.printEncodersNumberOfPulses();
+		break;
 	}
 	case 'a':
 	{
 	  drive.turnLeft();
 	  std::cout << "Left." << std::endl;
-	  break;
+	  drive.printEncodersNumberOfPulses();
+		break;
 	}
 	case 'd':
 	{
 	  drive.turnRight();
 	  std::cout << "Right." << std::endl;
-	  break;
+	  drive.printEncodersNumberOfPulses();
+		break;
 	}
 	case ' ':
 	{
@@ -93,16 +93,19 @@ int main(void)
 	  drive.stop();
 
 	  std::cout << "Stop." << std::endl;
+		drive.printEncodersNumberOfPulses();
 	  break;
 	}	
 	default:
 	{}
 	break;
+	drive.calculateCorrectionsForDrive();
 	}
-    }
+  }
 }
 
 void readEncodersChange()
 {
-  drive.readEncoders();
+  
+ drive.readEncoders();
 };

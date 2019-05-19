@@ -37,18 +37,18 @@ bool RotationProfiler::isNecessaryToBrake()
 
 int RotationProfiler::calculateTheRotation()
 {
-   if( status == ProfilerStatus::drive ) 
+   if( status == rProfilerStatus::drive ) 
    { 
      if(isNecessaryToBrake()) 
      { 
-         status = ProfilerStatus::braking; 
+         status = rProfilerStatus::braking; 
          targetSpeed = nextStepSpeed; 
      } 
     } 
  
-    if( status == ProfilerStatus::braking && currentSpeed == 0 ) 
+    if( status == rProfilerStatus::braking && currentSpeed == 0 ) 
     { 
-     status = ProfilerStatus::end; 
+     status = rProfilerStatus::end; 
      targetSpeed = nextStepSpeed; 
     } 
  
@@ -68,4 +68,6 @@ int RotationProfiler::calculateTheRotation()
      calculatedRotation += ( ( currentSpeed + 128 ) >> 8 ); 
     else 
      calculatedRotation -= ( ( currentSpeed + 128 ) >> 8 );
+
+     return calculatedRotation;
 };

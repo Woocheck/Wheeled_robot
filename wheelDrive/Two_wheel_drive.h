@@ -9,8 +9,8 @@
 #ifndef __TWO_WHEEL_DRIVE_CLASS_H__
 #define __TWO_WHEEL_DRIVE_CLASS_H__
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "../pin_settings.h"
 #include "../dcMotor/DC_motor_class.h"
 #include "../regulatorPD/regulatorPD.h"
@@ -32,7 +32,7 @@ class TwoWheelDrive
 		double totalAngleFromEnkoder {0};                
 
 		int minimalPWM {0}, maximalPWM {100};
-		double translationProportionalParameter {1}, translationDerivateParameter {1};
+		double translationProportionalParameter {10}, translationDerivateParameter {4};
 		double rotationProportionalParameter {1}, rotationDerivateParameter {1};
 
 		DcMotorClass Left_DC;
@@ -75,7 +75,6 @@ class TwoWheelDrive
 		void setNewDistanceToBeTraveled(int newTranslation, int newRotation);
 		void readEncoders();
 		void calculateCorrectionsForDrive();
-		void printEncodersNumberOfPulses();
 	
 	private:
 		TwoWheelDrive( const TwoWheelDrive &c );

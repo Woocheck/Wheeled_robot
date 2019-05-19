@@ -65,5 +65,7 @@ int TranslationProfiler::calculateTheTranslation()
     } 
  
     calculatedRoad += ( ( currentSpeed + 128 ) >> 8 ); 
+
+    return calculatedRoad;
  
 };

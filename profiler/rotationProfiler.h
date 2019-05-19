@@ -9,12 +9,12 @@
 #define __ROTATION_PROFILER_CLASS_H__
 
 
-enum class ProfilerStatus {drive, braking, end};
+enum class rProfilerStatus {drive, braking, end};
 
 class RotationProfiler 
 {
    private:
-   ProfilerStatus status {ProfilerStatus::drive};
+   rProfilerStatus status {rProfilerStatus::drive};
    int targetSpeed  {50};         
    int nextStepSpeed {50};
    int currentSpeed {0};         

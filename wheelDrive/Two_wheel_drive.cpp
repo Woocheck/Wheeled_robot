@@ -6,8 +6,8 @@
 */
 
 #include <iostream>
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 #include "../pin_settings.h"
 
 #include "../dcMotor/DC_motor_class.h"
