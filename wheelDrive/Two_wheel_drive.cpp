@@ -5,15 +5,15 @@
 * Author: Woocheck
 */
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
-#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
+#include <wiringPi.h>
+#include <softPwm.h>
+#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
 
-#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
-#include "/home/user/workspace_project/Wheeled_robot/wheelDrive/Two_wheel_drive.h"
+#include "/home/pi/Wheel/Wheeled_robot/dcMotor/DC_motor_class.h"
+#include "/home/pi/Wheel/Wheeled_robot/wheelDrive/Two_wheel_drive.h"
 
-#include "/home/user/workspace_project/Wheeled_robot/regulatorPD/regulatorPD.h"
-#include "/home/user/workspace_project/Wheeled_robot/encoder/encoder.h"
+#include "/home/pi/Wheel/Wheeled_robot/regulatorPD/regulatorPD.h"
+#include "/home/pi/Wheel/Wheeled_robot/encoder/encoder.h"
 
 
 TwoWheelDrive::~TwoWheelDrive()
