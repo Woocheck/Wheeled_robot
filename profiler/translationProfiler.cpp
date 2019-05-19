@@ -48,7 +48,8 @@ int TranslationProfiler::calculateTheTranslation()
     if( calculatedRoad >= targetRoad || ( status == ProfilerStatus::braking && currentSpeed == 0 ) ) 
     { 
      status = ProfilerStatus::end; 
-     targetSpeed = nextStepSpeed; 
+     targetSpeed = nextStepSpeed;
+      
     } 
  
     if( currentSpeed < targetSpeed ) 
