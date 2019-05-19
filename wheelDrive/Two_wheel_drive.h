@@ -9,14 +9,14 @@
 #ifndef __TWO_WHEEL_DRIVE_CLASS_H__
 #define __TWO_WHEEL_DRIVE_CLASS_H__
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
-#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
-#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h"
-#include "/home/user/workspace_project/Wheeled_robot/regulatorPD/regulatorPD.h"
-#include "/home/user/workspace_project/Wheeled_robot/encoder/encoder.h"
-#include "/home/user/workspace_project/Wheeled_robot/profiler/translationProfiler.h"
-#include "/home/user/workspace_project/Wheeled_robot/profiler/rotationProfiler.h"
+#include <wiringPi.h>
+#include <softPwm.h>
+#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
+#include "/home/pi/Wheel/Wheeled_robot/dcMotor/DC_motor_class.h"
+#include "/home/pi/Wheel/Wheeled_robot/regulatorPD/regulatorPD.h"
+#include "/home/pi/Wheel/Wheeled_robot/encoder/encoder.h"
+#include "/home/pi/Wheel/Wheeled_robot/profiler/translationProfiler.h"
+#include "/home/pi/Wheel/Wheeled_robot/profiler/rotationProfiler.h"
 
 
 class TwoWheelDrive
@@ -52,7 +52,7 @@ class TwoWheelDrive
 
 	public:
 		TwoWheelDrive():
-			Left_DC(  PIN_LEFT_A, PIN_LEFT_B, PIN_LEFT_ENABLE ),
+			Left_DC(  PIN_LEFT_A, PIN_LEFT_B , PIN_LEFT_ENABLE ),
 			Right_DC( PIN_RIGHT_A, PIN_RIGHT_B , PIN_RIGHT_ENABLE ),
 			encoderLeft( PIN_ENCODER_LEFT_A, PIN_ENCODER_LEFT_B ),
 			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),

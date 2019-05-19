@@ -9,9 +9,9 @@
 #ifndef __DC_MOTOR_CLASS_H__
 #define __DC_MOTOR_CLASS_H__
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
-#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
+#include <wiringPi.h>
+#include <softPwm.h>
+#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
 
 enum class Direction {forward, backward, left, right};
 
@@ -30,14 +30,15 @@ private:
 
 public:
 	
-	DcMotorClass() = default;
+	DcMotorClass();
 	DcMotorClass(int a, int b, int enable):
 					pinA {a},
 					pinB {b},
 					pinEnable {enable} {
+		
 		pinMode (pinA, OUTPUT);
 		pinMode (pinB, OUTPUT) ;
-		softPwmCreate(pinEnable, 0, 100);
+		softPwmCreate(pinEnable, 100, 100);
 	};
 	
 	~DcMotorClass(); 

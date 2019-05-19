@@ -5,10 +5,11 @@
 * Author: Woocheck
 */
 
-#include </home/user/workspace_project/wiringPi/wiringPi/wiringPi.h>
-#include </home/user/workspace_project/wiringPi/wiringPi/softPwm.h>
-#include "/home/user/workspace_project/Wheeled_robot/pin_settings.h"
-#include "/home/user/workspace_project/Wheeled_robot/dcMotor/DC_motor_class.h" 
+#include <iostream>
+#include <wiringPi.h>
+#include <softPwm.h>
+#include "/home/pi/Wheel/Wheeled_robot/pin_settings.h"
+#include "/home/pi/Wheel/Wheeled_robot/dcMotor/DC_motor_class.h" 
 
 
 
@@ -27,44 +28,45 @@ void DcMotorClass::setDirection(Direction demandedDirection)
 	DcMotorClass::direction=demandedDirection;
 	if (direction==Direction::forward)
 	{
-		digitalWrite (0, HIGH); 
-		digitalWrite (0,  LOW); 
+		digitalWrite (pinA, HIGH); 
+		digitalWrite (pinB,  LOW); 
 	}
 	else if(direction==Direction::backward)
 	{
-		digitalWrite (0, LOW); 
-		digitalWrite (0,  HIGH);
+		digitalWrite ( pinA, LOW ); 
+		digitalWrite ( pinB, HIGH );
 	}
 }
 
 
 void DcMotorClass::setSpeed(volatile int demandedSpeed)
-{
-	speed = demandedSpeed;
-	if(demandedSpeed<0)
+{	
+	if(demandedSpeed < 0)
 	{
-		softPwmCreate(pinEnable, speed, 100);
+		speed = 0;
 	}
-	else if(demandedSpeed>255)
+	else if( demandedSpeed > 100 )
 	{
-		softPwmCreate(pinEnable, speed, 100);
+		speed = 100;
 	}
 	else
 	{
-		softPwmCreate(pinEnable, speed, 100);
+		speed = demandedSpeed;
 	}
+	
+	softPwmWrite( pinEnable, speed);
 }
 
 void DcMotorClass::start()
 {
-	setDirection(direction);
-	softPwmCreate(pinEnable, speed, 100);
+	setDirection( direction );
+	softPwmWrite( pinEnable, speed );
 }
 
 void DcMotorClass::stop()
 {
-	digitalWrite (0, LOW); 
-	digitalWrite (0, LOW);
+	digitalWrite ( pinA, LOW ); 
+	digitalWrite ( pinB, LOW );
 }
 
 
