@@ -22,21 +22,22 @@ class Detector
       Detector(){};
       Detector(int pin1, int pin2, int pin3, int pin4, int pin5 )
       {
-         sensor.at(0) = pin1;
-         sensor.at(1) = pin2;
-         sensor.at(2) = pin3;
-         sensor.at(3) = pin4;
-         sensor.at(4) = pin5;
+         sensor.at( 0 ) = pin1;
+         sensor.at( 1 ) = pin2;
+         sensor.at( 2 ) = pin3;
+         sensor.at( 3 ) = pin4;
+         sensor.at( 4 ) = pin5;
 
          for(int sesorNumber : sensor)
          {
-            pinMode ( sensorNumber, INPUT);
+            pinMode ( sensorNumber, INPUT );
          }
          
       }
 
       void readSensorsState();
       std::vector<int> getSensorsState();
+      void printSensorsState();
 };
 
 
