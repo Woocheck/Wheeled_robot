@@ -2,3 +2,5 @@
 *.ipch
 *.bin
 
+dcMotor/DC_motor_class.cpp.save
+dcMotor/DC_motor_class.h.save
