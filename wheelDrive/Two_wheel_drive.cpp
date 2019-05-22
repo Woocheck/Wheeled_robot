@@ -58,8 +58,7 @@ void TwoWheelDrive::stop()
 	Right_DC.stop();
 };
 
-void TwoWheelDrive::setNewDistanceToBeTraveled(int newTranslation, 
-												int newRotation )
+void TwoWheelDrive::setNewDistanceToBeTraveled(int newTranslation, int newRotation )
 {
 	distanceToGo = newTranslation;
 	angleToGo = newRotation;

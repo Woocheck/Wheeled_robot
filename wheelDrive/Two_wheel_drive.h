@@ -31,9 +31,9 @@ class TwoWheelDrive
 		double angleToGo {0}; 
 		double totalAngleFromEnkoder {0};                
 
-		int minimalPWM {0}, maximalPWM {100};
+		const int minimalPWM {0}, maximalPWM {100};
 		double translationProportionalParameter {10}, translationDerivateParameter {4};
-		double rotationProportionalParameter {1}, rotationDerivateParameter {1};
+		double rotationProportionalParameter {10}, rotationDerivateParameter {4};
 
 		DcMotorClass Left_DC;
 		DcMotorClass Right_DC;
