@@ -1,5 +1,5 @@
 /* 
-* encoder_class.h
+* encoder.h
 *
 * Created: 01.05.2019
 * Author: Woocheck

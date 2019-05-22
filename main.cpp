@@ -24,7 +24,10 @@
 #include "./lineDetector/detector.h"
 
 
+void setEncodersInterrupts();
+void setDetectorInterrupts();
 void readEncodersChange();
+void readDetectorChange();
 
 Detector lineDetector;
 TwoWheelDrive drive;
@@ -32,7 +35,10 @@ TwoWheelDrive drive;
 int main(void)
 {
   wiringPiSetup();
-    
+  
+	void setEncodersInterrupts();
+	void setDetectorInterrupts();
+ 
   char buf [80] ;
 
     
@@ -110,8 +116,24 @@ int main(void)
   }
 }
 
+void setEncodersInterrupts()
+{
+	wiringPiISR (PIN_ENCODER_LEFT_A, CHANGE,  readEncodersChange ) ; 
+  wiringPiISR (PIN_ENCODER_RIGHT_A, CHANGE,  readEncodersChange ) ; 
+};
+
+void setDetectorInterrupts()
+{
+	wiringPiISR (PIN_ENCODER_RIGHT_A, CHANGE,  readEncodersChange ) ; 
+  wiringPiISR (PIN_ENCODER_RIGHT_A, CHANGE,  readEncodersChange ) ; 
+};
+
 void readEncodersChange()
 {
-  
  drive.readEncoders();
+};
+
+void readDetectorChange()
+{
+	lineDetector.readSensorsState();
 };
