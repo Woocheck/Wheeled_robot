@@ -37,9 +37,9 @@ class Encoder
   {
       wiringPiSetup();
       pinMode ( pinA, INPUT ) ;
-      pullUpDnControl (pinA, PUD_UP);
+      
 	    pinMode ( pinB, INPUT ) ;
-      pullUpDnControl (pinB, PUD_UP);
+      
       rotationDirection = Direction::forward;
   }
   
