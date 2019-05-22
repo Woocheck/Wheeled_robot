@@ -75,6 +75,7 @@ class TwoWheelDrive
 		void setNewDistanceToBeTraveled(int newTranslation, int newRotation);
 		void readEncoders();
 		void calculateCorrectionsForDrive();
+		void printEncodersNumberOfPulses();
 	
 	private:
 		TwoWheelDrive( const TwoWheelDrive &c );
