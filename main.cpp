@@ -29,7 +29,8 @@ void setDetectorInterrupts();
 void readEncodersChange();
 void readDetectorChange();
 
-Detector lineDetector;
+Detector lineDetector( PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3,
+											 PIN_SENSOR_4, PIN_SENSOR_5 );
 TwoWheelDrive drive;
 
 int main(void)
@@ -47,70 +48,70 @@ int main(void)
   while(1)
   {
 		fgets (key, 80, stdin) ;
-		witch( key[0] )
+		switch( key[0] )
 		{
-		case 'w':
-		{
-		  drive.goForward();
-		  std::cout << "Forward." << std::endl;
-			drive.printEncodersNumberOfPulses();
-		  break;
-		}
-		case 's':
-		{
-		  drive.goBackward();
-		  std::cout << "Backward." << std::endl;
-		  drive.printEncodersNumberOfPulses();
-			break;
-		}
-		case 'a':
-		{
-		  drive.turnLeft();
-		  std::cout << "Left." << std::endl;
-		  drive.printEncodersNumberOfPulses();
-			break;
-		}
-		case 'd':
-		{
-		  drive.turnRight();
-		  std::cout << "Right." << std::endl;
-		  drive.printEncodersNumberOfPulses();
-			break;
-		}
-		case ' ':
-		{
-		  if(speed >=10) 
-		  {
-		    speed = speed - 10;
-		    drive.setSpeed( speed );
-		  }
-		  std::cout << "Speed:" << speed << std::endl;	
-		  break;
-		}
-		case 'e':
-		{
-		  if(speed <=90) 
-		  {
-		    speed = speed + 10;
-		    drive.setSpeed( speed );
-		  }
-		  std::cout << "Speed:" << speed << std::endl;
-		  break;
-		}
-		case 'q':
-		{
+			case 'w':
+			{
+			  drive.goForward();
+			  std::cout << "Forward." << std::endl;
+				drive.printEncodersNumberOfPulses();
+			  break;
+			}
+			case 's':
+			{
+			  drive.goBackward();
+			  std::cout << "Backward." << std::endl;
+			  drive.printEncodersNumberOfPulses();
+				break;
+			}
+			case 'a':
+			{
+			  drive.turnLeft();
+			  std::cout << "Left." << std::endl;
+			  drive.printEncodersNumberOfPulses();
+				break;
+			}
+			case 'd':
+			{
+			  drive.turnRight();
+			  std::cout << "Right." << std::endl;
+			  drive.printEncodersNumberOfPulses();
+				break;
+			}
+			case ' ':
+			{
+			  if(speed >=10) 
+			  {
+			    speed = speed - 10;
+			    drive.setSpeed( speed );
+			  }
+			  std::cout << "Speed:" << speed << std::endl;	
+			  break;
+			}
+			case 'e':
+			{
+			  if(speed <=90) 
+			  {
+			    speed = speed + 10;
+			    drive.setSpeed( speed );
+			  }
+			  std::cout << "Speed:" << speed << std::endl;
+			  break;
+			}
+			case 'q':
+			{
 
-		  drive.stop();
+			  drive.stop();
 
-		  std::cout << "Stop." << std::endl;
-			drive.printEncodersNumberOfPulses();
-		  break;
-		}	
-		default:
-		{}
-		break;
+			  std::cout << "Stop." << std::endl;
+				drive.printEncodersNumberOfPulses();
+			  break;
+			}	
+			default:
+			{}
+			break;
 		
-		drive.calculateCorrectionsForDrive();
+			drive.calculateCorrectionsForDrive();
 		
 		}
   }
@@ -118,14 +119,18 @@ int main(void)
 
 void setEncodersInterrupts()
 {
-	wiringPiISR (PIN_ENCODER_LEFT_A, CHANGE,  readEncodersChange ) ; 
-  wiringPiISR (PIN_ENCODER_RIGHT_A, CHANGE,  readEncodersChange ) ; 
+	wiringPiISR (PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
+  wiringPiISR (PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
 };
 
 void setDetectorInterrupts()
 {
-	wiringPiISR (PIN_ENCODER_RIGHT_A, CHANGE,  readEncodersChange ) ; 
-  wiringPiISR (PIN_ENCODER_RIGHT_A, CHANGE,  readEncodersChange ) ; 
+	wiringPiISR (PIN_SENSOR_1, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+	wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+	wiringPiISR (PIN_SENSOR_3, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+	wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+	wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+ 
 };
 
 void readEncodersChange()
@@ -136,4 +141,5 @@ void readEncodersChange()
 void readDetectorChange()
 {
 	lineDetector.readSensorsState();
+	lineDetector.printSensorsState();
 };
