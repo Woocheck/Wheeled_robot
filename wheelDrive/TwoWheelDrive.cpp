@@ -1,5 +1,5 @@
 /* 
-* Two_wheel_drive_class.cpp
+* TwoWheelDrive.cpp
 *
 * Created: 15.03.2019 18:50:45
 * Author: Woocheck
@@ -10,8 +10,8 @@
 #include <softPwm.h>
 #include "../pin_settings.h"
 
-#include "../dcMotor/DC_motor_class.h"
-#include "./Two_wheel_drive.h"
+#include "../dcMotor/DCmotor.h"
+#include "./TwoWheelDrive.h"
 
 #include "../regulatorPD/regulatorPD.h"
 #include "../encoder/encoder.h"

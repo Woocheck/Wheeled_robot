@@ -16,7 +16,11 @@ void TranslationProfiler::setGivenAcceleration( const int acceleration )
 {
    givenAcceleration = acceleration;
 };
-int getGivenAcceleration();
+
+int TranslationProfiler::getGivenAcceleration()
+{
+   return givenAcceleration;
+};
 
 void TranslationProfiler::setTargetSpeed( const int speed )
 {
@@ -64,7 +68,7 @@ int TranslationProfiler::calculateTheTranslation()
      if( currentSpeed < targetSpeed ) currentSpeed = targetSpeed; 
     } 
  
-    calculatedRoad += ( ( currentSpeed + 128 ) >> 8 ); 
+    calculatedRoad += currentSpeed; 
 
     return calculatedRoad;
  

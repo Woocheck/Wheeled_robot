@@ -34,7 +34,7 @@ class Detector
          {
             std::cout << "sensor numer: " << sensorNumber;
             pinMode ( sensorNumber, INPUT );
-            std::cout << " sensor value: " << digitalRead (sensorNumber) << std::endl;
+            std::cout << " sensor value: " << digitalRead ( sensorNumber ) << std::endl;
          }
          
       }

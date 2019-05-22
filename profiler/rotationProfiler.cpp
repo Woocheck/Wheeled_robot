@@ -1,5 +1,5 @@
 /* 
-* rotationProfilerClass.h.h
+* rotationProfilerClass.h
 *
 * Created: 01.05.2019
 * Author: Woocheck
@@ -17,7 +17,10 @@ void RotationProfiler::setGivenAcceleration( const int acceleration )
    givenAcceleration = acceleration;
 };
 
-int getGivenAcceleration();
+int RotationProfiler::getGivenAcceleration()
+{
+   return givenAcceleration;
+};
 
 void RotationProfiler::setTargetSpeed( const int speed )
 {
@@ -65,9 +68,9 @@ int RotationProfiler::calculateTheRotation()
     } 
  
     if( targetAngle > 0 ) 
-     calculatedRotation += ( ( currentSpeed + 128 ) >> 8 ); 
+     calculatedRotation += currentSpeed; 
     else 
-     calculatedRotation -= ( ( currentSpeed + 128 ) >> 8 );
+     calculatedRotation -= currentSpeed;
 
      return calculatedRotation;
 };

@@ -1,5 +1,5 @@
 /* 
-* Two_wheel_drive_class.h
+* TwoWheelDrive.h
 *
 * Created: 15.03.2019 18:50:45
 * Author: Woocheck
@@ -12,7 +12,7 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include "../pin_settings.h"
-#include "../dcMotor/DC_motor_class.h"
+#include "../dcMotor/DCmotor.h"
 #include "../regulatorPD/regulatorPD.h"
 #include "../encoder/encoder.h"
 #include "../profiler/translationProfiler.h"
@@ -54,8 +54,10 @@ class TwoWheelDrive
 		TwoWheelDrive():
 			Left_DC(  PIN_LEFT_A, PIN_LEFT_B , PIN_LEFT_ENABLE ),
 			Right_DC( PIN_RIGHT_A, PIN_RIGHT_B , PIN_RIGHT_ENABLE ),
+			
 			encoderLeft( PIN_ENCODER_LEFT_A, PIN_ENCODER_LEFT_B ),
 			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),
+			
 			translationRegulator( maximalPWM, minimalPWM, 
 										translationProportionalParameter, 
 										translationDerivateParameter ),
@@ -72,8 +74,10 @@ class TwoWheelDrive
 		void turnLeft();
 		void turnRight();
 		void stop();
+		
 		void setNewDistanceToBeTraveled(int newTranslation, int newRotation);
 		void readEncoders();
+		
 		void calculateCorrectionsForDrive();
 		void printEncodersNumberOfPulses();
 	

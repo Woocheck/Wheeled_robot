@@ -1,5 +1,5 @@
 /* 
-* translationProfilerClass.h
+* regulatorPD.h
 *
 * Created: 07.05.2019
 * Author: Woocheck

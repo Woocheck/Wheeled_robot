@@ -11,7 +11,7 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include "../pin_settings.h"
-#include "../dcMotor/DC_motor_class.h"
+#include "../dcMotor/DCmotor.h"
 
 class Encoder 
 {

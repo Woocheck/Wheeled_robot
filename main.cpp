@@ -18,8 +18,8 @@
 
 #include "./pin_settings.h"
 
-#include "./dcMotor/DC_motor_class.h"
-#include "./wheelDrive/Two_wheel_drive.h"
+#include "./dcMotor/DCmotor.h"
+#include "./wheelDrive/TwoWheelDrive.h"
 #include "./encoder/encoder.h"
 #include "./lineDetector/detector.h"
 
@@ -119,8 +119,8 @@ int main(void)
 
 void setEncodersInterrupts()
 {
-	wiringPiISR (PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
-  wiringPiISR (PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
+	wiringPiISR ( PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
+  wiringPiISR ( PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
 };
 
 void setDetectorInterrupts()

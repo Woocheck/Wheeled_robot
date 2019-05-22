@@ -18,8 +18,8 @@
 
 #include "./pin_settings.h"
 
-#include "./dcMotor/DC_motor_class.h"
-#include "./wheelDrive/Two_wheel_drive.h"
+#include "./dcMotor/DCmotor.h"
+#include "./wheelDrive/TwoWheelDrive.h"
 #include "./encoder/encoder.h"
 
 
