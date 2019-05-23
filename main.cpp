@@ -36,10 +36,25 @@ TwoWheelDrive drive;
 int main(void)
 {
   wiringPiSetup();
+<<<<<<< HEAD
+	setEncodersInterrupts();
+  setDetectorInterrupts();
+/*
+  wiringPiISR ( PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
+  wiringPiISR ( PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ;
+
+  wiringPiISR (PIN_SENSOR_1, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_3, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+*/
+=======
   
   void setEncodersInterrupts();
   void setDetectorInterrupts();
  
+>>>>>>> 433aede9e4503a61a90aca1596d0f3fd9e49e3f3
   char buf [80] ;
 
     
@@ -128,17 +143,19 @@ void setDetectorInterrupts()
   wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
   wiringPiISR (PIN_SENSOR_3, INT_EDGE_BOTH,  &readDetectorChange ) ; 
   wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
-  wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ;
  
 };
+ 
 
 void readEncodersChange()
 {
-  drive.readEncoders();
+	std::cout << "Encoder."<< std::endl;
+ drive.readEncoders();
 };
 
 void readDetectorChange()
 {
-  lineDetector.readSensorsState();
-  lineDetector.printSensorsState();
+	lineDetector.readSensorsState();
+	lineDetector.printSensorsState();	
 };
