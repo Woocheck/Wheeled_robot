@@ -18,8 +18,7 @@ void Detector::readSensorsState()
 {
    for(int sensorNumer { 0 } ; sensorNumer < sensor.size() ; sensorNumer++ )
    {
-      sensorsState.at( sensorNumer ) = digitalRead ( sensorNumer );
-      std::cout << "sensors readed." << std::endl;
+      sensorsState.at( sensorNumer ) = digitalRead ( sensor.at( sensorNumer ) );
    }
 };
 
@@ -37,4 +36,4 @@ void Detector::printSensorsState()
    }
 
    std::cout << std::endl;
-}
+} 
