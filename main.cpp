@@ -19,7 +19,7 @@
 #include "./pin_settings.h"
 
 #include "./dcMotor/DCmotor.h"
-#include "./wheelDrive/TwoWheelDrive.h"
+#include "./wheelDrive/twoWheelDrive.h"
 #include "./encoder/encoder.h"
 #include "./lineDetector/detector.h"
 
