@@ -30,21 +30,22 @@ void readEncodersChange();
 void readDetectorChange();
 
 Detector lineDetector( PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3,
-											 PIN_SENSOR_4, PIN_SENSOR_5 );
+			PIN_SENSOR_4, PIN_SENSOR_5 );
 TwoWheelDrive drive;
 
 int main(void)
 {
   wiringPiSetup();
   
-	void setEncodersInterrupts();
-	void setDetectorInterrupts();
+  void setEncodersInterrupts();
+  void setDetectorInterrupts();
  
   char buf [80] ;
 
     
   int speed {0};
   char key[8];
+	
   while(1)
   {
 		fgets (key, 80, stdin) ;
@@ -54,7 +55,7 @@ int main(void)
 			{
 			  drive.goForward();
 			  std::cout << "Forward." << std::endl;
-				drive.printEncodersNumberOfPulses();
+			  drive.printEncodersNumberOfPulses();
 			  break;
 			}
 			case 's':
@@ -62,21 +63,21 @@ int main(void)
 			  drive.goBackward();
 			  std::cout << "Backward." << std::endl;
 			  drive.printEncodersNumberOfPulses();
-				break;
+			  break;
 			}
 			case 'a':
 			{
 			  drive.turnLeft();
 			  std::cout << "Left." << std::endl;
 			  drive.printEncodersNumberOfPulses();
-				break;
+			  break;
 			}
 			case 'd':
 			{
 			  drive.turnRight();
 			  std::cout << "Right." << std::endl;
 			  drive.printEncodersNumberOfPulses();
-				break;
+			  break;
 			}
 			case ' ':
 			{
@@ -100,11 +101,9 @@ int main(void)
 			}
 			case 'q':
 			{
-
 			  drive.stop();
-
 			  std::cout << "Stop." << std::endl;
-				drive.printEncodersNumberOfPulses();
+			  drive.printEncodersNumberOfPulses();
 			  break;
 			}	
 			default:
@@ -119,27 +118,27 @@ int main(void)
 
 void setEncodersInterrupts()
 {
-	wiringPiISR ( PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
+  wiringPiISR ( PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
   wiringPiISR ( PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
 };
 
 void setDetectorInterrupts()
 {
-	wiringPiISR (PIN_SENSOR_1, INT_EDGE_BOTH,  &readDetectorChange ) ; 
-	wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
-	wiringPiISR (PIN_SENSOR_3, INT_EDGE_BOTH,  &readDetectorChange ) ; 
-	wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
-	wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_1, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_3, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
  
 };
 
 void readEncodersChange()
 {
- drive.readEncoders();
+  drive.readEncoders();
 };
 
 void readDetectorChange()
 {
-	lineDetector.readSensorsState();
-	lineDetector.printSensorsState();
+  lineDetector.readSensorsState();
+  lineDetector.printSensorsState();
 };
