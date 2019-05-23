@@ -59,11 +59,11 @@ class TwoWheelDrive
 			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),
 			
 			translationRegulator( maximalPWM, minimalPWM, 
-										translationProportionalParameter, 
-										translationDerivateParameter ),
+			                      translationProportionalParameter, 
+			                      translationDerivateParameter ),
 			rotationRegulator( maximalPWM, minimalPWM, 
-										rotationProportionalParameter, 
-										rotationDerivateParameter )
+					  rotationProportionalParameter,
+					  rotationDerivateParameter )
 		{
 			wiringPiSetup();
 		};
