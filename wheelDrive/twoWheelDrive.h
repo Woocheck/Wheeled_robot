@@ -15,8 +15,7 @@
 #include "../dcMotor/DCmotor.h"
 #include "../regulatorPD/regulatorPD.h"
 #include "../encoder/encoder.h"
-#include "../profiler/translationProfiler.h"
-#include "../profiler/rotationProfiler.h"
+
 
 
 class TwoWheelDrive
@@ -28,21 +27,21 @@ class TwoWheelDrive
 		const double Kp {1};
 		const double Kd {0};
 		
-		DcMotorClass Left_DC;
-		DcMotorClass Right_DC;
+		DcMotor leftDC;
+		DcMotor rightDC;
 
 		Encoder encoderLeft;
 		Encoder encoderRight;
 
 		RegulatorPD regulator;
 
-		int speed {0};
+		int speed {50};
 		Direction direction {Direction::forward};
 
 	public:
 		TwoWheelDrive():
-			Left_DC(  PIN_LEFT_A, PIN_LEFT_B , PIN_LEFT_ENABLE ),
-			Right_DC( PIN_RIGHT_A, PIN_RIGHT_B , PIN_RIGHT_ENABLE ),
+			leftDC(  PIN_LEFT_A, PIN_LEFT_B , PIN_LEFT_ENABLE ),
+			rightDC( PIN_RIGHT_A, PIN_RIGHT_B , PIN_RIGHT_ENABLE ),
 			
 			encoderLeft( PIN_ENCODER_LEFT_A, PIN_ENCODER_LEFT_B ),
 			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),
@@ -59,8 +58,9 @@ class TwoWheelDrive
 		void turnRight();
 		void stop();
 		
-		void control
+		void regulateInLineFollwerMode( int correction );
 		void readEncoders();
+		void printEncodersNumberOfPulses();
 	
 	private:
 		TwoWheelDrive( const TwoWheelDrive &c );

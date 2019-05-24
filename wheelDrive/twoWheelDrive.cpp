@@ -24,42 +24,51 @@ TwoWheelDrive::~TwoWheelDrive()
 void TwoWheelDrive::setSpeed(int demandedSpeed)
 {
 	speed=demandedSpeed;
-	Left_DC.control(direction, speed);
-	Right_DC.control(direction, speed);
+	leftDC.control(direction, speed);
+	rightDC.control(direction, speed);
 };
 
 void TwoWheelDrive::goForward()
 {
 	direction = Direction::forward;
-	Left_DC.control(Direction::forward, speed);
-	Right_DC.control(Direction::forward, speed);
+	leftDC.control(Direction::forward, speed);
+	rightDC.control(Direction::forward, speed);
 };
 
 void TwoWheelDrive::goBackward()
 {
 	direction = Direction::backward;
-	Left_DC.control(Direction::backward, speed);
-	Right_DC.control(Direction::backward, speed);
+	leftDC.control(Direction::backward, speed);
+	rightDC.control(Direction::backward, speed);
 };
 
 void TwoWheelDrive::turnLeft()
 {
 	direction = Direction::left;
-	Left_DC.stop();
-	Right_DC.control(Direction::forward, speed);
+	leftDC.stop();
+	rightDC.control(Direction::forward, speed);
 };
 
 void TwoWheelDrive::turnRight()
 {
 	direction = Direction::right;
-	Left_DC.control(Direction::forward, speed);
-	Right_DC.stop();
+	leftDC.control(Direction::forward, speed);
+	rightDC.stop();
 };
 
 void TwoWheelDrive::stop()
 {
-	Left_DC.stop();
-	Right_DC.stop();
+	leftDC.stop();
+	rightDC.stop();
+};
+
+void TwoWheelDrive::regulateInLineFollwerMode( int correction )
+{
+	int leftWheelSpeed = speed + correction ;
+	int rightWheelSpeed = speed - correction ;
+
+	leftDC.control( direction, leftWheelSpeed);
+	rightDC.control( direction, rightWheelSpeed);
 };
 
 void TwoWheelDrive::readEncoders()
