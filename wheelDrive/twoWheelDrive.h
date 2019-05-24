@@ -21,31 +21,20 @@
 
 class TwoWheelDrive
 {
-	private:
+	private:               
 
-		double currentTranslationError {0}; 
-		double distanceToGo {0}; 
-		double totalDistanceFromEnkoder {0};  
-
-		double currentRotationError {0}; 
-		double angleToGo {0}; 
-		double totalAngleFromEnkoder {0};                
-
-		const int minimalPWM {0}, maximalPWM {100};
-		double translationProportionalParameter {10}, translationDerivateParameter {4};
-		double rotationProportionalParameter {10}, rotationDerivateParameter {4};
-
+		const int minimalPWM {0};
+		const int maximalPWM {100};
+		const double Kp {1};
+		const double Kd {0};
+		
 		DcMotorClass Left_DC;
 		DcMotorClass Right_DC;
 
 		Encoder encoderLeft;
 		Encoder encoderRight;
 
-		TranslationProfiler translationProfiler;
-		RotationProfiler rotationProfiler;
-
-		RegulatorPD translationRegulator;
-		RegulatorPD rotationRegulator;
+		RegulatorPD regulator;
 
 		int speed {0};
 		Direction direction {Direction::forward};
@@ -57,13 +46,8 @@ class TwoWheelDrive
 			
 			encoderLeft( PIN_ENCODER_LEFT_A, PIN_ENCODER_LEFT_B ),
 			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),
-			
-			translationRegulator( maximalPWM, minimalPWM, 
-			                      translationProportionalParameter, 
-			                      translationDerivateParameter ),
-			rotationRegulator( maximalPWM, minimalPWM, 
-					  rotationProportionalParameter,
-					  rotationDerivateParameter )
+
+			regulator( minimalPWM, maximalPWM, Kp, Kd )
 		{
 			wiringPiSetup();
 		};
@@ -75,11 +59,8 @@ class TwoWheelDrive
 		void turnRight();
 		void stop();
 		
-		void setNewDistanceToBeTraveled(int newTranslation, int newRotation);
+		void control
 		void readEncoders();
-		
-		void calculateCorrectionsForDrive();
-		void printEncodersNumberOfPulses();
 	
 	private:
 		TwoWheelDrive( const TwoWheelDrive &c );

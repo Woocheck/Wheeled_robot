@@ -11,7 +11,7 @@
 #include "../pin_settings.h"
 
 #include "../dcMotor/DCmotor.h"
-#include "./TwoWheelDrive.h"
+#include "./twoWheelDrive.h"
 
 #include "../regulatorPD/regulatorPD.h"
 #include "../encoder/encoder.h"
@@ -27,24 +27,28 @@ void TwoWheelDrive::setSpeed(int demandedSpeed)
 	Left_DC.control(direction, speed);
 	Right_DC.control(direction, speed);
 };
+
 void TwoWheelDrive::goForward()
 {
 	direction = Direction::forward;
 	Left_DC.control(Direction::forward, speed);
 	Right_DC.control(Direction::forward, speed);
 };
+
 void TwoWheelDrive::goBackward()
 {
 	direction = Direction::backward;
 	Left_DC.control(Direction::backward, speed);
 	Right_DC.control(Direction::backward, speed);
 };
+
 void TwoWheelDrive::turnLeft()
 {
 	direction = Direction::left;
 	Left_DC.stop();
 	Right_DC.control(Direction::forward, speed);
 };
+
 void TwoWheelDrive::turnRight()
 {
 	direction = Direction::right;
@@ -58,33 +62,11 @@ void TwoWheelDrive::stop()
 	Right_DC.stop();
 };
 
-void TwoWheelDrive::setNewDistanceToBeTraveled(int newTranslation, int newRotation )
-{
-	distanceToGo = newTranslation;
-	angleToGo = newRotation;
-	
-}
-
 void TwoWheelDrive::readEncoders()
 {
 	encoderLeft.readDistance();
 	encoderRight.readDistance();
 }
-
-void TwoWheelDrive::calculateCorrectionsForDrive()
-{
-	int translation = encoderLeft.getNumeberOfPulses() + encoderRight.getNumeberOfPulses() ; 
-	double translationError = translationProfiler.getCalculatedTranslation() - translation ;
-	int newTranslationSets = translationRegulator.calculate( translationError ) ;
-
-	int rotation = encoderLeft.getNumeberOfPulses() - encoderRight.getNumeberOfPulses() ;
-	double rotationError = rotationProfiler.getCalculatedRotation() - rotation ;
-	int newRotationSets = rotationRegulator.calculate( rotationError ) ;
-
-	Left_DC.control( Direction::forward , newTranslationSets + newRotationSets ) ;
-	Right_DC.control( Direction::forward , newTranslationSets - newRotationSets ) ;
-
-};
 
 void TwoWheelDrive::printEncodersNumberOfPulses()
 {
