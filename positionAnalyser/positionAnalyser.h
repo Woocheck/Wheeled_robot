@@ -10,11 +10,10 @@ private:
    int previousError {0};
    int offTheRoad {0};
    int error {0};
-   int pop_blad = 0, Kp = 1, Kd = 0;
 
 public:
-   PositionAnalyser();
-   ~PositionAnalyser();
+   PositionAnalyser(){};
+   ~PositionAnalyser(){};
    void setSensorsState(std::vector<int>);
    void calculateError();
    double getCalculatedError();
