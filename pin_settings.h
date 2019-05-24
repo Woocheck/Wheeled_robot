@@ -29,5 +29,7 @@
  #define PIN_SENSOR_3 27
  #define PIN_SENSOR_4 28
  #define PIN_SENSOR_5 29
+
+ #define PIN_BUTTON 1111
  
 #endif /* PIN_SETTINGS_H_ */

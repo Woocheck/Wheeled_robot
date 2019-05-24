@@ -19,93 +19,66 @@
 #include "./pin_settings.h"
 
 #include "./dcMotor/DCmotor.h"
-#include "./wheelDrive/TwoWheelDrive.h"
+#include "./wheelDrive/twoWheelDrive.h"
 #include "./encoder/encoder.h"
+#include "./lineDetector/detector.h"
 
 
+bool isPassed20ms();
+bool isOn();
 void readEncodersChange();
+void readDetectorChange();
+
+Detector lineDetector( PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3,
+			PIN_SENSOR_4, PIN_SENSOR_5 );
 TwoWheelDrive drive;
 
 int main(void)
 {
   wiringPiSetup();
-    
-  char buf [80] ;
+	
+  wiringPiISR ( PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
+  wiringPiISR ( PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ;
 
-    
-    int speed {0};
-    char key[8];
-    while(1)
-    {fgets (key, 80, stdin) ;
-	switch( key[0] )
-	{
-	case 'w':
-	{
-	  drive.goForward();
-	  std::cout << "Forward." << std::endl;
-		drive.printEncodersNumberOfPulses();
-	  break;
-	}
-	case 's':
-	{
-	  drive.goBackward();
-	  std::cout << "Backward." << std::endl;
-	  drive.printEncodersNumberOfPulses();
-		break;
-	}
-	case 'a':
-	{
-	  drive.turnLeft();
-	  std::cout << "Left." << std::endl;
-	  drive.printEncodersNumberOfPulses();
-		break;
-	}
-	case 'd':
-	{
-	  drive.turnRight();
-	  std::cout << "Right." << std::endl;
-	  drive.printEncodersNumberOfPulses();
-		break;
-	}
-	case ' ':
-	{
-	  if(speed >=10) 
-	  {
-	    speed = speed - 10;
-	    drive.setSpeed( speed );
-	  }
-	  std::cout << "Speed:" << speed << std::endl;	
-	  break;
-	}
-	case 'e':
-	{
-	  if(speed <=90) 
-	  {
-	    speed = speed + 10;
-	    drive.setSpeed( speed );
-	  }
-	  std::cout << "Speed:" << speed << std::endl;
-	  break;
-	}
-	case 'q':
-	{
+  wiringPiISR (PIN_SENSOR_1, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_3, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
+  wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
 
-	  drive.stop();
-
-	  std::cout << "Stop." << std::endl;
-		drive.printEncodersNumberOfPulses();
-	  break;
-	}	
-	default:
-	{}
-	break;
-	drive.calculateCorrectionsForDrive();
-	}
+  
+	
+  while(1)
+  {
+		if(isOn())
+		{
+		  if(isPassed20ms())
+		  {
+  
+		  }
+		}
+		
   }
 }
 
+
+ bool isPassed20ms()
+ {
+	 return (milis()%20)==0;
+ };
+
+ bool isOn()
+ {
+	 return digitalRead (PIN_BUTTON); 
+ }
+
 void readEncodersChange()
 {
-  
- drive.readEncoders();
+  drive.readEncoders();
+};
+
+void readDetectorChange()
+{
+	lineDetector.readSensorsState();
+	lineDetector.printSensorsState();	
 };
