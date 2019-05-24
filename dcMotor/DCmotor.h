@@ -15,7 +15,7 @@
 
 enum class Direction {forward, backward, left, right};
 
-class DcMotorClass
+class DcMotor
 {
 
 private:
@@ -30,8 +30,8 @@ private:
 
 public:
 	
-	DcMotorClass();
-	DcMotorClass(int a, int b, int enable):
+	DcMotor();
+	DcMotor(int a, int b, int enable):
 					pinA {a},
 					pinB {b},
 					pinEnable {enable} {
@@ -42,7 +42,7 @@ public:
 		softPwmCreate(pinEnable, 100, 100);
 	};
 	
-	~DcMotorClass(); 
+	~DcMotor(); 
 				   	
 	void setDirection(Direction demanded_direction);					
 	void setSpeed(int demanded_speed);
@@ -52,8 +52,8 @@ public:
 	void control(Direction demanded_direction, int demanded_speed);
 	
 private:
-	DcMotorClass( const DcMotorClass &c );
-	DcMotorClass& operator=( const DcMotorClass &c );
+	DcMotor( const DcMotor &c );
+	DcMotor& operator=( const DcMotor &c );
 
 }; 
 
