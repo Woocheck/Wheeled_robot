@@ -62,7 +62,7 @@ int main(void)
 				analyser.setSensorsState( lineDetector.getSensorsState() );
         analyser.calculateError();
         
-				double correction = analyser.getCalculatedError();
+				int correction = static_cast<int>( analyser.getCalculatedError() );
         drive.regulateInLineFollwerMode( correction );	
 		  }
 		}
@@ -72,12 +72,12 @@ int main(void)
 
  bool isPassed20ms()
  {
-	 return (milis()%20)==0;
+	 return ( millis()%20) == 0;
  };
 
  bool isOn()
  {
-	 return digitalRead (PIN_BUTTON); 
+	 return true; //digitalRead (PIN_BUTTON); 
  }
 
 void readEncodersChange()
