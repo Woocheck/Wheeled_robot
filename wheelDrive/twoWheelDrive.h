@@ -24,8 +24,8 @@ class TwoWheelDrive
 
 		const int minimalPWM {0};
 		const int maximalPWM {100};
-		const double Kp {1};
-		const double Kd {0};
+		const double Kp {2};
+		const double Kd {0.003};
 		
 		DcMotor leftDC;
 		DcMotor rightDC;
@@ -59,6 +59,7 @@ class TwoWheelDrive
 		void stop();
 		
 		void regulateInLineFollwerMode( int correction );
+		void regulateInLineLookingForMode( int leftSpeed, int rightSpeed );
 		void readEncoders();
 		void printEncodersNumberOfPulses();
 	

@@ -71,6 +71,12 @@ void TwoWheelDrive::regulateInLineFollwerMode( int correction )
 	rightDC.control( direction, rightWheelSpeed);
 };
 
+void TwoWheelDrive::regulateInLineLookingForMode( int leftSpeed, int rightSpeed )
+{
+	leftDC.control( direction, leftSpeed);
+	rightDC.control( direction, rightSpeed);
+};
+
 void TwoWheelDrive::readEncoders()
 {
 	encoderLeft.readDistance();
