@@ -12,6 +12,7 @@
 #include <string.h>
 #include <vector>
 #include <unistd.h>
+#include <algorithm>
 
 #include <wiringPi.h>
 #include <softPwm.h>
@@ -23,6 +24,7 @@
 #include "./encoder/encoder.h"
 #include "./lineDetector/detector.h"
 #include "./positionAnalyser/positionAnalyser.h"
+#include "./timer/timer.h"
 
 
 
@@ -31,6 +33,7 @@ bool isOn();
 void readEncodersChange();
 void readDetectorChange();
 void lookingForLine();
+void isLineDetected();
 
 Detector lineDetector( PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3,
                        PIN_SENSOR_4, PIN_SENSOR_5 );
@@ -99,9 +102,34 @@ void readDetectorChange()
 
 void lookingForLine()
 {
-  int radius {1};
+  Timer timeBetweenRadiusChange;
+  
+  int increaseSpeedForBiggerRadius {1};
+  int leftWheelSpeed {50};
+  int rightWheelSpeed {0}
+  
+  timeBetweenRadiusChange.start();
+  
   while(1)
   {
-    
+    drive.regulateInLineLookingForMode( leftWheelSpeed, 
+      rightWheelSpeed + increaseSpeedForBiggerRadius );
+    timeBetweenRadiusChange.stop();
+    if( 2 <= timeBetweenRadiusChange.getDuration() )
+      {
+        increaseSpeedForBiggerRadius++;
+        timeBetweenRadiusChange.start(); 
+      }
+    if(isLineDetected())
+    {
+      drive.stop();
+      break;
+    }
   }
+}
+
+void isLineDetected()
+{
+  std::vector<int> sensorsState = lineDetector.printSensorsState;
+  return std::any_of( std::begin( sensorsState ), std::end( sensorsState ), 1 );
 }
