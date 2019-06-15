@@ -30,6 +30,7 @@ bool isPassed20ms();
 bool isOn();
 void readEncodersChange();
 void readDetectorChange();
+void lookingForLine();
 
 Detector lineDetector( PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3,
                        PIN_SENSOR_4, PIN_SENSOR_5 );
@@ -51,10 +52,15 @@ int main(void)
 
   int nominalSpeed {50};
 	
+  if(isOn()) 
+    lookingForLine();
+
   while(1)
   {
 		if(isOn())
 		{
+      
+
 		  if(isPassed20ms())
 		  {
 				lineDetector.readSensorsState();
@@ -77,7 +83,7 @@ int main(void)
 
  bool isOn()
  {
-	 return true; //digitalRead (PIN_BUTTON); 
+	 return digitalRead (PIN_BUTTON); 
  }
 
 void readEncodersChange()
@@ -90,3 +96,12 @@ void readDetectorChange()
 	lineDetector.readSensorsState();
 	lineDetector.printSensorsState();	
 };
+
+void lookingForLine()
+{
+  int radius {1};
+  while(1)
+  {
+    
+  }
+}
