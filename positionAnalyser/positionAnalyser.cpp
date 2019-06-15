@@ -1,3 +1,4 @@
+
 #include "./positionAnalyser.h"
 
 void PositionAnalyser::setSensorsState(std::vector<int> sensorsToWrite)
