@@ -113,7 +113,7 @@ void lookingForLine()
   while(1)
   {
     drive.regulateInLineLookingForMode( leftWheelSpeed, 
-      rightWheelSpeed + increaseSpeedForBiggerRadius );
+              rightWheelSpeed + increaseSpeedForBiggerRadius );
     timeBetweenRadiusChange.stop();
     if( 2 <= timeBetweenRadiusChange.getDuration() )
       {
