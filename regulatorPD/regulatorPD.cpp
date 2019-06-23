@@ -11,11 +11,6 @@ double RegulatorPD::calculate(double error)
 
     double output = outputP + outputD;
 
-    if( output > maximalValue )
-        output = maximalValue;
-    else if( output < minimalValue )
-        output = minimalValue;
-
     previousError = error;
 
     return output;

@@ -15,8 +15,6 @@ class RegulatorPD
 {
    private:
    
-   double maximalValue;
-   double minimalValue;
    double proportionalParameter;
    double derivateParameter;
    double previousError {0};
@@ -24,9 +22,7 @@ class RegulatorPD
 
    public:
    RegulatorPD() = default;
-   RegulatorPD(  double max, double min, double Kp, double Kd ):
-               maximalValue ( max ),
-               minimalValue ( min ),
+   RegulatorPD( double Kp, double Kd ):
                proportionalParameter ( Kp ),
                derivateParameter ( Kd ) {};
    ~RegulatorPD() {};
