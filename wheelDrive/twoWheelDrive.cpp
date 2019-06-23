@@ -13,7 +13,7 @@
 #include "../dcMotor/DCmotor.h"
 #include "./twoWheelDrive.h"
 
-#include "../regulatorPD/regulatorPD.h"
+//#include "../regulatorPD/regulatorPD.h"
 #include "../encoder/encoder.h"
 
 

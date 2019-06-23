@@ -13,7 +13,6 @@
 #include <softPwm.h>
 #include "../pin_settings.h"
 #include "../dcMotor/DCmotor.h"
-#include "../regulatorPD/regulatorPD.h"
 #include "../encoder/encoder.h"
 
 
@@ -26,14 +25,18 @@ class TwoWheelDrive
 		const int maximalPWM {100};
 		const double Kp {2};
 		const double Kd {0.003};
+
+		const double translationKp {2};
+		const double translationKd {0.003};
 		
+		const double rotationKp {2};
+		const double rotationKd {0.003};
+
 		DcMotor leftDC;
 		DcMotor rightDC;
 
 		Encoder encoderLeft;
 		Encoder encoderRight;
-
-		RegulatorPD regulator;
 
 		int speed {50};
 		Direction direction {Direction::forward};
@@ -46,11 +49,11 @@ class TwoWheelDrive
 			encoderLeft( PIN_ENCODER_LEFT_A, PIN_ENCODER_LEFT_B ),
 			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),
 
-			regulator( minimalPWM, maximalPWM, Kp, Kd )
 		{
 			wiringPiSetup();
 		};
 		~TwoWheelDrive();
+
 		void setSpeed(int demandedSpeed);
 		void goForward();
 		void goBackward();
