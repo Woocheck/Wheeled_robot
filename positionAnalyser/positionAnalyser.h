@@ -2,6 +2,9 @@
 #define __POSITION_ANALYSER_H__
 
 #include <vector>
+
+#include "../regulatorPD/regulatorPD.h"
+
 class PositionAnalyser
 {
 private:
@@ -10,9 +13,15 @@ private:
    int previousError {0};
    int offTheRoad {0};
    int error {0};
+   const double Kp {2};
+   const double Kd {0.003};
+
+   RegulatorPD regulator;
 
 public:
-   PositionAnalyser(){};
+   PositionAnalyser():
+      regulator( Kp, Kd )
+      {};
    ~PositionAnalyser(){};
    void setSensorsState(std::vector<int>);
    void calculateError();

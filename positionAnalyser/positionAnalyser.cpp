@@ -53,7 +53,7 @@ void PositionAnalyser::calculateError()
 	else if( offTheRoad == 2 && errorValue <= 0 )
 	  offTheRoad = 0;
 	
-	calculatedError = errorValue;
+	calculatedError = regulator.calculate( errorValue );
 }
 
 double PositionAnalyser::getCalculatedError()
