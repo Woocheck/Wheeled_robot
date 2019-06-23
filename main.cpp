@@ -54,7 +54,8 @@ int main(void)
   wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
 
   int nominalSpeed {50};
-	
+	drive.setSpeed( nominalSpeed );
+  
   if(isOn()) 
     lookingForLine();
 
