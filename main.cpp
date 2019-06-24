@@ -115,12 +115,14 @@ void lookingForLine()
   {
     drive.regulateInLineLookingForMode( leftWheelSpeed, 
               rightWheelSpeed + increaseSpeedForBiggerRadius );
+              
     timeBetweenRadiusChange.stop();
     if( 2 <= timeBetweenRadiusChange.getDuration() )
       {
         increaseSpeedForBiggerRadius++;
         timeBetweenRadiusChange.start(); 
       }
+
     if(isLineDetected())
     {
       drive.stop();
@@ -131,6 +133,6 @@ void lookingForLine()
 
 void isLineDetected()
 {
-  std::vector<int> sensorsState = lineDetector.printSensorsState;
+  std::vector<int> sensorsState = lineDetector.printSensorsState();
   return std::any_of( std::begin( sensorsState ), std::end( sensorsState ), 1 );
 }
