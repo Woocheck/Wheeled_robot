@@ -93,14 +93,13 @@ int main(void)
 void readEncodersChange()
 {
   drive.readEncoders();
+  drive.printEncodersNumberOfPulses();
 };
 
 void readDetectorChange()
 {
 	lineDetector.readSensorsState();
 	lineDetector.printSensorsState();	
-  drive.readEncoders();
-  drive.printEncodersNumberOfPulses();
 };
 
 void lookingForLine()
