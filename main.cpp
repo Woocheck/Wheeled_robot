@@ -99,6 +99,8 @@ void readDetectorChange()
 {
 	lineDetector.readSensorsState();
 	lineDetector.printSensorsState();	
+  drive.readEncoders();
+  drive.printEncodersNumberOfPulses();
 };
 
 void lookingForLine()
