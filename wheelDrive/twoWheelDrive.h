@@ -47,7 +47,7 @@ class TwoWheelDrive
 			rightDC( PIN_RIGHT_A, PIN_RIGHT_B , PIN_RIGHT_ENABLE ),
 			
 			encoderLeft( PIN_ENCODER_LEFT_A, PIN_ENCODER_LEFT_B ),
-			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B ),
+			encoderRight( PIN_ENCODER_RIGHT_A, PIN_ENCODER_RIGHT_B )
 
 		{
 			wiringPiSetup();

@@ -33,7 +33,7 @@ bool isOn();
 void readEncodersChange();
 void readDetectorChange();
 void lookingForLine();
-void isLineDetected();
+bool isLineDetected();
 
 Detector lineDetector( PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3,
                        PIN_SENSOR_4, PIN_SENSOR_5 );
@@ -108,7 +108,7 @@ void lookingForLine()
   
   int increaseSpeedForBiggerRadius {1};
   int leftWheelSpeed {50};
-  int rightWheelSpeed {0}
+  int rightWheelSpeed {0};
   
   timeBetweenRadiusChange.start();
   
@@ -118,7 +118,7 @@ void lookingForLine()
               rightWheelSpeed + increaseSpeedForBiggerRadius );
               
     timeBetweenRadiusChange.stop();
-    if( 2 <= timeBetweenRadiusChange.getDuration() )
+    if( static_cast<std::chrono::duration<double>>( 2 ) <= timeBetweenRadiusChange.getDuration() )
       {
         increaseSpeedForBiggerRadius++;
         timeBetweenRadiusChange.start(); 
@@ -132,8 +132,10 @@ void lookingForLine()
   }
 }
 
-void isLineDetected()
+bool isLineDetected()
 {
-  std::vector<int> sensorsState = lineDetector.printSensorsState();
-  return std::any_of( std::begin( sensorsState ), std::end( sensorsState ), 1 );
+  std::vector<int> sensorsState = lineDetector.getSensorsState();
+  bool result = std::any_of( std::begin( sensorsState ), std::end( sensorsState ), 
+                             []( const int & sensor ) { return sensor == 1; } );
+  return result;
 }
