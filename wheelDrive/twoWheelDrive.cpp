@@ -62,6 +62,25 @@ void TwoWheelDrive::stop()
 	rightDC.stop();
 };
 
+void TwoWheelDrive::driveControll( int leftSpeed, int rightSpeed )
+{
+	Direction leftDirection {};
+	Direction rightDirection {};
+
+	if( leftSpeed >= 0)
+		leftDirection = Direction::forward;
+	else
+		leftDirection = Direction::backward;
+
+	if( rightSpeed >= 0)
+		rightDirection = Direction::forward;
+	else
+		rightDirection = Direction::backward;
+	
+	leftDC.control( leftDirection, leftSpeed);
+	rightDC.control( rightDirection, rightSpeed);
+};
+
 void TwoWheelDrive::regulateInLineFollwerMode( int correction )
 {
 	int leftWheelSpeed = speed + correction ;
@@ -73,8 +92,7 @@ void TwoWheelDrive::regulateInLineFollwerMode( int correction )
 
 void TwoWheelDrive::regulateInLineLookingForMode( int leftSpeed, int rightSpeed )
 {
-	leftDC.control( direction, leftSpeed);
-	rightDC.control( direction, rightSpeed);
+	driveControll( int leftSpeed, int rightSpeed );
 };
 
 void TwoWheelDrive::readEncoders()

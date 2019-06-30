@@ -60,6 +60,7 @@ class TwoWheelDrive
 		void turnLeft();
 		void turnRight();
 		void stop();
+		void driveControll( int leftSpeed, int rightSpeed );
 		
 		void regulateInLineFollwerMode( int correction );
 		void regulateInLineLookingForMode( int leftSpeed, int rightSpeed );
