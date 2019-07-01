@@ -35,7 +35,8 @@ class RouteController
     
     public:
         RouteController(): _translator( 50, 5, 100 ), _rotator( 50, 5, 0 ) {};
-       
+        int getTranslation();
+        int getRotation();
 };
 
 #endif
