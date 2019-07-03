@@ -10,6 +10,7 @@
 #include "../pin_settings.h"
 
 #include "./encoder.h"
+#include "../dcMotor/DCmotor.h"
 
 void Encoder::readDistance()
 {
@@ -17,19 +18,21 @@ void Encoder::readDistance()
   if((previousStatusPinA == LOW) && currentStatusPinA==HIGH)
   {
     int statusPinB = digitalRead (pinB);
-    if(statusPinB == LOW && wayside)
+    if(statusPinB == LOW && rotationDirection == Direction::forward )
     {
-      wayside = false; //Reverse
+      rotationDirection == Direction::backward;
     }
-    else if(statusPinB == HIGH && !wayside)
+    else if(statusPinB == HIGH && rotationDirection == Direction::backward )
     {
-      wayside = true;  //Forward
+      rotationDirection == Direction::forward
     }
   }
   previousStatusPinA = currentStatusPinA;
 
-  if(!wayside)  numberOfPulses++;
-  else  numberOfPulses--;
+  if(rotationDirection == Direction::backward)  
+    numberOfPulses++;
+  else  
+    numberOfPulses--;
 
 }
 
