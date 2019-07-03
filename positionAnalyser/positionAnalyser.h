@@ -14,7 +14,7 @@ private:
    int offTheRoad {0};
    int error {0};
    const double Kp {2};
-   const double Kd {0.003};
+   const double Kd {1};
 
    RegulatorPD regulator;
 
