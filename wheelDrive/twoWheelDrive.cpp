@@ -92,7 +92,7 @@ void TwoWheelDrive::regulateInLineFollwerMode( int correction )
 
 void TwoWheelDrive::regulateInLineLookingForMode( int leftSpeed, int rightSpeed )
 {
-	driveControll( int leftSpeed, int rightSpeed );
+	driveControll( leftSpeed, rightSpeed );
 };
 
 void TwoWheelDrive::readEncoders()
