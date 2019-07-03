@@ -118,7 +118,7 @@ void lookingForLine()
               rightWheelSpeed + increaseSpeedForBiggerRadius );
               
     timeBetweenRadiusChange.stop();
-    if( static_cast<std::chrono::duration<double>>( 2 ) <= timeBetweenRadiusChange.getDuration() )
+    if( static_cast< std::chrono::duration<double> >( 2 ) <= timeBetweenRadiusChange.getDuration() )
       {
         increaseSpeedForBiggerRadius++;
         timeBetweenRadiusChange.start(); 
@@ -134,6 +134,7 @@ void lookingForLine()
 
 bool isLineDetected()
 {
+  lineDetector.readSensorsState();
   std::vector<int> sensorsState = lineDetector.getSensorsState();
   bool result = std::any_of( std::begin( sensorsState ), std::end( sensorsState ), 
                              []( const int & sensor ) { return sensor == 1; } );
