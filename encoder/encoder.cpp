@@ -24,12 +24,12 @@ void Encoder::readDistance()
     }
     else if(statusPinB == HIGH && rotationDirection == Direction::backward )
     {
-      rotationDirection == Direction::forward
+      rotationDirection == Direction::forward;
     }
   }
   previousStatusPinA = currentStatusPinA;
 
-  if(rotationDirection == Direction::backward)  
+  if(rotationDirection == Direction::forward)  
     numberOfPulses++;
   else  
     numberOfPulses--;
