@@ -37,7 +37,6 @@ class Encoder
   {
       wiringPiSetup();
       pinMode ( pinA, INPUT ) ;
-      
 	    pinMode ( pinB, INPUT ) ;
       
       rotationDirection = Direction::forward;

@@ -64,7 +64,8 @@ class TwoWheelDrive
 		
 		void regulateInLineFollwerMode( int correction );
 		void regulateInLineLookingForMode( int leftSpeed, int rightSpeed );
-		void readEncoders();
+		void readRightEncoder();
+		void readLeftEncoder();
 		void printEncodersNumberOfPulses();
 	
 	private:
