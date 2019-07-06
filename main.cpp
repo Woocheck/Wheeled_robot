@@ -30,7 +30,8 @@
 
 bool isPassed20ms();
 bool isOn();
-void readEncodersChange();
+void readLeftEncoderChange();
+void readRightEncoderChange();
 void readDetectorChange();
 void lookingForLine();
 bool isLineDetected();
@@ -44,8 +45,8 @@ int main(void)
 {
   wiringPiSetup();
 	
-  wiringPiISR ( PIN_ENCODER_LEFT_A, INT_EDGE_BOTH,  &readEncodersChange ) ; 
-  wiringPiISR ( PIN_ENCODER_RIGHT_A, INT_EDGE_BOTH,  &readEncodersChange ) ;
+  wiringPiISR ( PIN_ENCODER_RIGHT_B, INT_EDGE_BOTH,  &readRightEncoderChange ) ; 
+  wiringPiISR ( PIN_ENCODER_LEFT_B, INT_EDGE_BOTH,  &readLeftEncoderChange ) ;
 
   wiringPiISR (PIN_SENSOR_1, INT_EDGE_BOTH,  &readDetectorChange ) ; 
   wiringPiISR (PIN_SENSOR_2, INT_EDGE_BOTH,  &readDetectorChange ) ; 
@@ -56,15 +57,16 @@ int main(void)
   int nominalSpeed {50};
 	drive.setSpeed( nominalSpeed );
   
-  if(isOn()) 
+  if(!isOn()) 
+  {
+    std::cout << "looking for line\n";
     lookingForLine();
-
+    std::cout << "line founded\n";
+  }
   while(1)
   {
-		if(isOn())
+		if(!isOn())
 		{
-      
-
 		  if(isPassed20ms())
 		  {
 				lineDetector.readSensorsState();
@@ -87,12 +89,19 @@ int main(void)
 
  bool isOn()
  {
+   pinMode ( PIN_BUTTON, INPUT ) ;
 	 return digitalRead (PIN_BUTTON); 
  }
 
-void readEncodersChange()
+void readRightEncoderChange()
 {
-  drive.readEncoders();
+  drive.readRightEncoder();
+  drive.printEncodersNumberOfPulses();
+};
+
+void readLeftEncoderChange()
+{
+  drive.readLeftEncoder();
   drive.printEncodersNumberOfPulses();
 };
 
@@ -127,6 +136,7 @@ void lookingForLine()
     if(isLineDetected())
     {
       drive.stop();
+      std::cout << "I found the line!\n";
       break;
     }
   }
