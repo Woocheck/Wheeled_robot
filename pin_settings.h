@@ -19,7 +19,7 @@
  #define PIN_RIGHT_ENABLE 25
 
  #define PIN_ENCODER_LEFT_A 0
- #define PIN_ENCODER_LEFT_B 7
+ #define PIN_ENCODER_LEFT_B 9
 
  #define PIN_ENCODER_RIGHT_A 1
  #define PIN_ENCODER_RIGHT_B 4
@@ -30,6 +30,6 @@
  #define PIN_SENSOR_4 28
  #define PIN_SENSOR_5 29
 
- #define PIN_BUTTON 1
+ #define PIN_BUTTON 24
  
 #endif /* PIN_SETTINGS_H_ */
