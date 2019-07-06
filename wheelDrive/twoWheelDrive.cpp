@@ -95,10 +95,14 @@ void TwoWheelDrive::regulateInLineLookingForMode( int leftSpeed, int rightSpeed 
 	driveControll( leftSpeed, rightSpeed );
 };
 
-void TwoWheelDrive::readEncoders()
+void TwoWheelDrive::readRightEncoder()
 {
-	encoderLeft.readDistance();std::cout << "L\n";
-	encoderRight.readDistance();std::cout << "R\n";
+	encoderRight.readDistance();
+}
+
+void TwoWheelDrive::readLeftEncoder()
+{
+	encoderLeft.readDistance();
 }
 
 void TwoWheelDrive::printEncodersNumberOfPulses()
