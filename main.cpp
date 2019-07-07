@@ -54,7 +54,7 @@ int main(void)
   wiringPiISR (PIN_SENSOR_4, INT_EDGE_BOTH,  &readDetectorChange ) ; 
   wiringPiISR (PIN_SENSOR_5, INT_EDGE_BOTH,  &readDetectorChange ) ; 
 
-  int nominalSpeed {50};
+  int nominalSpeed {70};
 	drive.setSpeed( nominalSpeed );
   
   if(!isOn()) 
@@ -115,7 +115,7 @@ void lookingForLine()
 {
   Timer timeBetweenRadiusChange;
   
-  int increaseSpeedForBiggerRadius {1};
+  int increaseSpeedForBiggerRadius {15};
   int leftWheelSpeed {50};
   int rightWheelSpeed {0};
   
@@ -147,6 +147,6 @@ bool isLineDetected()
   lineDetector.readSensorsState();
   std::vector<int> sensorsState = lineDetector.getSensorsState();
   bool result = std::any_of( std::begin( sensorsState ), std::end( sensorsState ), 
-                             []( const int & sensor ) { return sensor == 1; } );
+                             []( const int & sensor ) { return sensor != 1; } );
   return result;
 }
