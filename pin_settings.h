@@ -23,18 +23,6 @@ struct Gpio {
     const int encoderRightA = 1;
     const int encoderRightB = 4;
     
-    const int frontSensor_1 = 6;
-    const int frontSensor_2 = 26;
-    const int frontSensor_3 = 27;
-    const int frontSensor_4 = 28;
-    const int frontSensor_5 = 29;
-
-    const int rearSensor_1 = 10;
-    const int rearSensor_2 = 10;
-    const int rearSensor_3 = 11;
-    const int rearSensor_4 = 31;
-    const int rearSensor_5 = 31;
-
     const int OnButton = 24;
 
 };

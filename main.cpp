@@ -49,18 +49,6 @@ int main( void )
   wiringPiISR ( gpio.encoderRightB, INT_EDGE_BOTH, &readRightEncoderChange ); 
   wiringPiISR ( gpio.encoderLeftB, INT_EDGE_BOTH, &readLeftEncoderChange );
 
-  wiringPiISR (gpio.frontSensor_1, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.frontSensor_2, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.frontSensor_3, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.frontSensor_4, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.frontSensor_5, INT_EDGE_BOTH, &readDetectorChange ); 
-
-  wiringPiISR (gpio.rearSensor_1, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.rearSensor_2, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.rearSensor_3, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.rearSensor_4, INT_EDGE_BOTH, &readDetectorChange ); 
-  wiringPiISR (gpio.rearSensor_5, INT_EDGE_BOTH, &readDetectorChange );
-
   int nominalSpeed { 60 };
   
   
@@ -72,11 +60,7 @@ bool isPassed20ms()
   return interval20ms.isPased();
 };
 
- bool isOn()
- {
-   pinMode ( gpio.OnButton, INPUT ) ;
-   return digitalRead ( gpio.OnButton ); 
- }
+
 
 void readRightEncoderChange()
 {
