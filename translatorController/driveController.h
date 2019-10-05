@@ -45,10 +45,10 @@ public:
         sigaction (SIGVTALRM, &sa, NULL);
 
         timer.it_value.tv_sec = 0;
-        timer.it_value.tv_usec = 10000;
+        timer.it_value.tv_usec = 9999;
         
         timer.it_interval.tv_sec = 0;
-        timer.it_interval.tv_usec = 10000;
+        timer.it_interval.tv_usec = 9999;
         
         setitimer (ITIMER_VIRTUAL, &timer, NULL);
     };
