@@ -25,6 +25,7 @@
 #include "./encoder/encoder.h"
 #include "./timer/timer.h"
 #include "./RoadControler/RoadControler.h"
+#include "./translatorController/driveController.h"
 
 bool isPassed20ms();
 bool isOn();
@@ -41,6 +42,7 @@ DcMotor leftDc( gpio.engineLeftA, gpio.engineLeftB , gpio.engineLeftEnable );
 DcMotor rightDc( gpio.engineRightA, gpio.engineRightB , gpio.engineRightEnable );
 TwoWheelDrive drive( std::make_shared<DcMotor>( leftDc ), std::make_shared<DcMotor>( rightDc ));
 RoadControler roadControler( leftEncoder, rightEencoder, drive );
+DriveController vehicleControler( drive, leftEncoder, rightEencoder );
 
 int main( void )
 {
@@ -51,6 +53,7 @@ int main( void )
 
   int nominalSpeed { 60 };
   
+  vehicleControler.move( 200, 0);
   
 }
 
