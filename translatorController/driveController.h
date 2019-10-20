@@ -27,6 +27,11 @@ class DriveController
     const float rotationKp_ { 1 };
     const float rotationKd_ { 0,25 };
 
+    bool isTimeToClaculateNextStep_;
+    int acceleration { 5 };
+    int distance_ { 0 };
+    int angle_ { 0 };
+
     struct sigaction sa;
     struct itimerval timer;
 
@@ -39,21 +44,23 @@ public:
                     rotationRegulator_( rotationKp_, rotationRegulator_ )
     {
         
+        isTimeToClaculateNextStep_ = false;
 
         memset (&sa, 0, sizeof (sa));
         sa.sa_handler = &timer_handler;
         sigaction (SIGVTALRM, &sa, NULL);
 
         timer.it_value.tv_sec = 0;
-        timer.it_value.tv_usec = 9999;
+        timer.it_value.tv_usec = 500000;
         
         timer.it_interval.tv_sec = 0;
-        timer.it_interval.tv_usec = 9999;
+        timer.it_interval.tv_usec = 500000;
         
         setitimer (ITIMER_VIRTUAL, &timer, NULL);
     };
     
-    void move( int distance, int angle );
+    void move( int dist, int ang );
+    void calculateNextStep();
     void timer_handler (int signum);
 }
 
