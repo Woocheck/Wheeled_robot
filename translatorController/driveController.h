@@ -21,6 +21,9 @@ class DriveController
 
     RegulatorPD translationRegulator_;
     RegulatorPD rotationRegulator_;
+
+    TranslationProfiler translationProfiler_;
+    RotationProfiler rotationProfiler_;
     
     const float translationKp_ { 1 };
     const float translationKd_ { 0,25 };
