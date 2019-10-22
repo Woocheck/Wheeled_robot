@@ -42,7 +42,7 @@ DcMotor leftDc( gpio.engineLeftA, gpio.engineLeftB , gpio.engineLeftEnable );
 DcMotor rightDc( gpio.engineRightA, gpio.engineRightB , gpio.engineRightEnable );
 TwoWheelDrive drive( std::make_shared<DcMotor>( leftDc ), std::make_shared<DcMotor>( rightDc ));
 RoadControler roadControler( leftEncoder, rightEencoder, drive );
-DriveController vehicleControler( drive, leftEncoder, rightEencoder );
+
 
 int main( void )
 {
@@ -52,7 +52,8 @@ int main( void )
   wiringPiISR ( gpio.encoderLeftB, INT_EDGE_BOTH, &readLeftEncoderChange );
 
   int nominalSpeed { 60 };
-  
+  DriveController vehicleControler( drive, leftEncoder, rightEencoder, nominalSpeed );
+
   vehicleControler.move( 200, 0);
   
 }
