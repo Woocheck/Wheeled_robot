@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
+#include <utility>
 
 #include "../encoder/encoder.h"
 #include "./translationProfiler.h"
@@ -31,7 +32,8 @@ class DriveController
     const float rotationKd_ { 0,25 };
 
     bool isTimeToClaculateNextStep_;
-    int acceleration { 5 };
+    int acceleration_ { 5 };
+    int targetSpeed_ { 0 };
     int distance_ { 0 };
     int angle_ { 0 };
 
@@ -39,12 +41,15 @@ class DriveController
     struct itimerval timer;
 
 public:
-    DriveController( TwoWheelDrive& drive, Encoder& lEnc, Encoder& rEnc ):
+    DriveController( TwoWheelDrive& drive, Encoder& lEnc, Encoder& rEnc, int targSp ):
                     drive_( drive ),
                     leftEncoder_( lEnc ),
                     rightEncoder_( rEnc ),
+                    targetSpeed_( targSp ),
                     translationRegulator_( translationKp_, translationKd_ ),
-                    rotationRegulator_( rotationKp_, rotationRegulator_ )
+                    rotationRegulator_( rotationKp_, rotationRegulator_ ),
+                    translationProfiler_( acceleration_, targetSpeed_ ),
+                    rotationProfiler_( acceleration_, targetSpeed_ )
     {
         
         isTimeToClaculateNextStep_ = false;
@@ -62,9 +67,14 @@ public:
         setitimer (ITIMER_VIRTUAL, &timer, NULL);
     };
     
-    void move( int dist, int ang );
-    void calculateNextStep();
     void timer_handler (int signum);
+    void move( int dist, int ang );
+    void moveNextStep();
+    bool isTimeToNextStep();
+private:
+    std::pair<int,int> calculateNextStep();
+    
+    
 }
 
 #endif 
