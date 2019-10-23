@@ -3,12 +3,10 @@
 
 #include "./driveController.h"
 
-void DriveController::timer_handler (int signum);
-{
-//     static int counter= 0;
-//     printf ("timerHandler: counter= %d\n", counter++);
-//     fflush (stdout);
-//TODO: software counter to run next tep calculations;
+void DriveController::timer_handler(int signum)
+{ 
+  if( isMoveOrdered_ )
+    moveNextStep();
 }
 
 bool DriveController::isTimeToNextStep()
@@ -24,16 +22,21 @@ void DriveController::move( int dist, int ang )
 
     rightEncoder_.resetNumberOfPulses();
     leftEncoder_.resetNumberOfPulses();    
-}
+
+    isMoveOrdered_ = true;
+  }
 
 std::pair<int,int> DriveController::calculateNextStep()
 {
-    int currentErrorTranslation = zad_S - enk_totalS;                // obliczenie aktualnego błędu translacji 
-    int currentErrorRotation = zad_T - enk_totalT;                // obliczenie aktualnego błędu rotacji 
-                                                // zmienne enk_totalS oraz enk_totalT zawierają aktualne pomiary z enkoderów, zgodnie ze schematem zamieszczonym powyżej 
- 
-    static int previousErrorTranslation = currentErrorTranslation; 
-    static int previousErrorRotation = currentErrorRotation;
+    static int previousErrorTranslation { 0 }; 
+    static int previousErrorRotation { 0 };
+
+    int currentErrorTranslation = distance_ 
+                                - ( leftEncoder_.getNumeberOfPulses
+                                + rightEncoder_.getNumeberOfPulses );
+    int currentErrorRotation = angle_ 
+                                - ( leftEncoder_.getNumeberOfPulses
+                                - rightEncoder_.getNumeberOfPulses );
 
     auto regulatorNewPwmLeft = translationRegulator_.calculate( 
                        currentErrorTranslation , 
@@ -47,7 +50,10 @@ std::pair<int,int> DriveController::calculateNextStep()
                        currentErrorTranslation - previousErrorTranslation )
                      - rotationRegulator_.calculate( 
                        currentErrorRotation , 
-                       currentErrorRotation - previousErrorRotation );  
+                       currentErrorRotation - previousErrorRotation ); 
+
+    previousErrorTranslation = currentErrorTranslation; 
+    previousErrorRotation = currentErrorRotation; 
  
     return std::make_pair( static_cast<int>( regulatorNewPwmLeft ), 
                            static_cast<int>( regulatorNewPwmRight ) );
@@ -58,7 +64,7 @@ void DriveController::moveNextStep()
     int leftPWM;
     int rightPWM;
 
-    [ leftPWM, righPWM ] = calculateNextStep();
+    [ leftPWM, rightPWM ] = calculateNextStep();
     
     drive_.driveControll( leftPWM, rightPWM );
 }

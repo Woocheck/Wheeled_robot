@@ -31,7 +31,7 @@ class DriveController
     const float rotationKp_ { 1 };
     const float rotationKd_ { 0,25 };
 
-    bool isTimeToClaculateNextStep_;
+    bool isMoveOrdered_ { false };
     int acceleration_ { 5 };
     int targetSpeed_ { 0 };
     int distance_ { 0 };
@@ -67,7 +67,7 @@ public:
         setitimer (ITIMER_VIRTUAL, &timer, NULL);
     };
     
-    void timer_handler (int signum);
+    void timer_handler(int signum);
     void move( int dist, int ang );
     void moveNextStep();
     bool isTimeToNextStep();
