@@ -31,12 +31,10 @@ std::pair<int,int> DriveController::calculateNextStep()
     static int previousErrorTranslation { 0 }; 
     static int previousErrorRotation { 0 };
 
-    int currentErrorTranslation = distance_ 
-                                - ( leftEncoder_.getNumeberOfPulses
-                                + rightEncoder_.getNumeberOfPulses );
-    int currentErrorRotation = angle_ 
-                                - ( leftEncoder_.getNumeberOfPulses
-                                - rightEncoder_.getNumeberOfPulses );
+    int currentErrorTranslation;
+    int currentErrorRotation;
+
+    [ currentErrorTranslation, currentErrorRotation ] = calculateCurrentError();
 
     auto regulatorNewPwmLeft = translationRegulator_.calculate( 
                        currentErrorTranslation , 
@@ -67,4 +65,14 @@ void DriveController::moveNextStep()
     [ leftPWM, rightPWM ] = calculateNextStep();
     
     drive_.driveControll( leftPWM, rightPWM );
+}
+
+std::pair<int,int> DriveController::calculateCurrentError()
+{
+  int translation = distance_ - ( leftEncoder_.getNumeberOfPulses
+                                + rightEncoder_.getNumeberOfPulses );
+  int rotation = angle_ - ( leftEncoder_.getNumeberOfPulses
+                          - rightEncoder_.getNumeberOfPulses );
+  
+  return std::make_pair<int, int>( translation, rotation );
 }

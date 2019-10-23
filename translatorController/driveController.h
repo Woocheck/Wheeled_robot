@@ -73,7 +73,7 @@ public:
     bool isTimeToNextStep();
 private:
     std::pair<int,int> calculateNextStep();
-    
+    std::pair<int,int> calculateCurrentError();  
     
 }
 
